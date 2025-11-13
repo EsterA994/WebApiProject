@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "Z:\\יד תשפו\\אינהורן אסתר\\Core\\MyJewelry\\MyJewelry.csproj": {}
+    "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj": {}
   },
   "projects": {
-    "Z:\\יד תשפו\\אינהורן אסתר\\Core\\MyJewelry\\MyJewelry.csproj": {
+    "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "Z:\\יד תשפו\\אינהורן אסתר\\Core\\MyJewelry\\MyJewelry.csproj",
+        "projectUniqueName": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj",
         "projectName": "MyJewelry",
-        "projectPath": "Z:\\יד תשפו\\אינהורן אסתר\\Core\\MyJewelry\\MyJewelry.csproj",
+        "projectPath": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj",
         "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
-        "outputPath": "Z:\\יד תשפו\\אינהורן אסתר\\Core\\MyJewelry\\obj\\",
+        "outputPath": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

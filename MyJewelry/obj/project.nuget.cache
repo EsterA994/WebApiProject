@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "jebnwixEu+w=",
+  "dgSpecHash": "6MN85IBiHsI=",
   "success": true,
-  "projectFilePath": "Z:\\יד תשפו\\אינהורן אסתר\\Core\\MyJewelry\\MyJewelry.csproj",
+  "projectFilePath": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\huser\\.nuget\\packages\\microsoft.aspnetcore.openapi\\9.0.7\\microsoft.aspnetcore.openapi.9.0.7.nupkg.sha512",
     "C:\\Users\\huser\\.nuget\\packages\\microsoft.openapi\\1.6.17\\microsoft.openapi.1.6.17.nupkg.sha512",

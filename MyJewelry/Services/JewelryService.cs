@@ -1,21 +1,20 @@
-
-// using Microsoft.AspNetCore.Mvc;
 using System.Linq;
-// using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
-// using MyJewelry.Services;
+using Microsoft.AspNetCore.Mvc;
+using System.Threading.Tasks;
 using MyJewelry.Models;
+using MyJewelry.Interfaces;
 
 
 namespace MyJewelry.Services;
 
-public class JewelryService
+public class JewelryService : IJewelryService
 {
     
-    static List<Jewelry> list;
+    private List<Jewelry> list;
 
 
-    static JewelryService()
+    public JewelryService()
     {
         list = new List<Jewelry>
         {
@@ -71,5 +70,16 @@ public class JewelryService
             return false;
         list.Remove(jewelry);
         return true;
+    }
+
+
+}
+
+    
+public static class JewelryServiceExtension
+{
+    public static void addJewelryService(this IServiceCollection services)
+    {
+        services.AddSingleton<IJewelryService, JewelryService>();
     }
 }

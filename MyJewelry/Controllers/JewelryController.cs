@@ -4,6 +4,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
 using MyJewelry.Services;
 using MyJewelry.Models;
+using MyJewelry.Interfaces;
 
 namespace MyJewelry.Controllers;
 
@@ -11,24 +12,24 @@ namespace MyJewelry.Controllers;
 [Route("[controller]")]
 public class JewelryController : ControllerBase
 {
-    private JewelryService service;
+    IJewelryService jewelryService;
 
-    public JewelryController()
+    public JewelryController(IJewelryService jewelryService)
     {
-        service = new JewelryService();
+        this.jewelryService = jewelryService;
     }
 
 
     [HttpGet()]
     public ActionResult<IEnumerable<Jewelry>> Get()
     {
-        return service.Get();
+        return jewelryService.Get();
     }
 
     [HttpGet("{id}")]
     public ActionResult<Jewelry> Get(int id)
     {
-        var jewelry = service.Get(id);
+        var jewelry = jewelryService.Get(id);
         if (jewelry == null)
             return NotFound();
         return jewelry;
@@ -37,19 +38,19 @@ public class JewelryController : ControllerBase
     [HttpPost]
     public ActionResult Create(Jewelry newJewelry)
     {
-        var postedJewelry = service.Create(newJewelry);
+        var postedJewelry = jewelryService.Create(newJewelry);
         return CreatedAtAction(nameof(Create), new { id = postedJewelry.Id });
     }
 
     [HttpPut("{id}")]
     public ActionResult Update(int id, Jewelry newJewelry)
     {
-        var jewelry = service.find(id);
+        var jewelry = jewelryService.find(id);
         if (jewelry == null)
             return NotFound();
         if (jewelry.Id != newJewelry.Id)
             return BadRequest();
-        service.Update(id,newJewelry);
+        jewelryService.Update(id,newJewelry);
 
         return NoContent();
     }
@@ -57,10 +58,11 @@ public class JewelryController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)
     {
-        var jewelry = service.find(id);
+        var jewelry = jewelryService.find(id);
+        
         if (jewelry == null)
             return NotFound();
-        service.Delete(id);
+        jewelryService.Delete(id);
 
         return NoContent();
     }

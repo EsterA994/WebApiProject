@@ -1,7 +1,13 @@
+
+using MyJewelry.Interfaces;
+using MyJewelry.Services;
+// using System.Collections.Generic;
+
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-
+builder.Services.addJewelryService();
 builder.Services.AddControllers();
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();

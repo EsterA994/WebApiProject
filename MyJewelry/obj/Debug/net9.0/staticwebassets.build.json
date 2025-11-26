@@ -1,1 +1,1042 @@
-{"Version":1,"Hash":"dJ0D5bmceCpbzh4/GkAtKR97p0ac446NbeWZXg7983M=","Source":"MyJewelry","BasePath":"_content/MyJewelry","Mode":"Default","ManifestType":"Build","ReferencedProjectsConfiguration":[],"DiscoveryPatterns":[],"Assets":[],"Endpoints":[]}
+{
+  "Version": 1,
+  "Hash": "4X6P0Ga/hvqE8BYCgjzVvMdXVDdFo/6QekxlKNVtdSo=",
+  "Source": "MyJewelry",
+  "BasePath": "_content/MyJewelry",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [],
+  "DiscoveryPatterns": [
+    {
+      "Name": "MyJewelry\\wwwroot",
+      "Source": "MyJewelry",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\",
+      "BasePath": "_content/MyJewelry",
+      "Pattern": "**"
+    }
+  ],
+  "Assets": [
+    {
+      "Identity": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\2jwgg99yri-yunxzs6e59.gz",
+      "SourceId": "MyJewelry",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyJewelry",
+      "RelativePath": "index#[.{fingerprint=yunxzs6e59}]?.html.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "3iavzidb4c",
+      "Integrity": "FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\lcfvqi2dbf-rit4cf5tx0.gz",
+      "SourceId": "MyJewelry",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyJewelry",
+      "RelativePath": "js/app#[.{fingerprint=rit4cf5tx0}]?.js.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "h6y66hvm05",
+      "Integrity": "iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\tu4bb5m5cw-zoxlk5se5i.gz",
+      "SourceId": "MyJewelry",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\",
+      "BasePath": "_content/MyJewelry",
+      "RelativePath": "css/style#[.{fingerprint=zoxlk5se5i}]?.css.gz",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Alternative",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css",
+      "AssetTraitName": "Content-Encoding",
+      "AssetTraitValue": "gzip",
+      "Fingerprint": "6iwh808co5",
+      "Integrity": "MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css",
+      "SourceId": "MyJewelry",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\",
+      "BasePath": "_content/MyJewelry",
+      "RelativePath": "css/style#[.{fingerprint}]?.css",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "zoxlk5se5i",
+      "Integrity": "06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\css\\style.css"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html",
+      "SourceId": "MyJewelry",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\",
+      "BasePath": "_content/MyJewelry",
+      "RelativePath": "index#[.{fingerprint}]?.html",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "yunxzs6e59",
+      "Integrity": "9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\index.html"
+    },
+    {
+      "Identity": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js",
+      "SourceId": "MyJewelry",
+      "SourceType": "Discovered",
+      "ContentRoot": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\",
+      "BasePath": "_content/MyJewelry",
+      "RelativePath": "js/app#[.{fingerprint}]?.js",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "AssetMergeBehavior": "",
+      "AssetMergeSource": "",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "Fingerprint": "rit4cf5tx0",
+      "Integrity": "jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk=",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\js\\app.js"
+    }
+  ],
+  "Endpoints": [
+    {
+      "Route": "css/style.css",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\tu4bb5m5cw-zoxlk5se5i.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.004651162791"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "214"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 18 Nov 2025 17:18:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.css",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 18 Nov 2025 17:18:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.css.gz",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\tu4bb5m5cw-zoxlk5se5i.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "214"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 18 Nov 2025 17:18:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.zoxlk5se5i.css",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\tu4bb5m5cw-zoxlk5se5i.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.004651162791"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "214"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 18 Nov 2025 17:18:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zoxlk5se5i"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.zoxlk5se5i.css",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "332"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 18 Nov 2025 17:18:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zoxlk5se5i"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-06WPOIW5/mIO+16lWWyaJd8OL4taYJX8l7d24pTFPC4="
+        }
+      ]
+    },
+    {
+      "Route": "css/style.zoxlk5se5i.css.gz",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\tu4bb5m5cw-zoxlk5se5i.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "214"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/css"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Tue, 18 Nov 2025 17:18:48 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "zoxlk5se5i"
+        },
+        {
+          "Name": "label",
+          "Value": "css/style.css.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-MrkGjfJbtiTQKCqzljej72Njbw6vWKiTb/Xs3LUMWco="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\2jwgg99yri-yunxzs6e59.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001700680272"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "587"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:21:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw="
+        }
+      ]
+    },
+    {
+      "Route": "index.html",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1439"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:21:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw="
+        }
+      ]
+    },
+    {
+      "Route": "index.html.gz",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\2jwgg99yri-yunxzs6e59.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "587"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:21:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE="
+        }
+      ]
+    },
+    {
+      "Route": "index.yunxzs6e59.html",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\2jwgg99yri-yunxzs6e59.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.001700680272"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "587"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:21:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yunxzs6e59"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw="
+        }
+      ]
+    },
+    {
+      "Route": "index.yunxzs6e59.html",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1439"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:21:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yunxzs6e59"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-9jUCTQf3xd7se942/CdBzS/PSR8xoDNroaM78lX8TWw="
+        }
+      ]
+    },
+    {
+      "Route": "index.yunxzs6e59.html.gz",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\2jwgg99yri-yunxzs6e59.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "587"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/html"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:21:44 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "yunxzs6e59"
+        },
+        {
+          "Name": "label",
+          "Value": "index.html.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-FZ60l/wvJwLD3RHlDDzD1xo1R7VWTXDehL9m5pnAIQE="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\lcfvqi2dbf-rit4cf5tx0.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000909090909"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1099"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.js.gz",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\lcfvqi2dbf-rit4cf5tx0.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1099"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "no-cache"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "integrity",
+          "Value": "sha256-iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.rit4cf5tx0.js",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\lcfvqi2dbf-rit4cf5tx0.gz",
+      "Selectors": [
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip",
+          "Quality": "0.000909090909"
+        }
+      ],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1099"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "W/\"jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk=\""
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rit4cf5tx0"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.rit4cf5tx0.js",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "4181"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rit4cf5tx0"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-jdmPstQd9fLWTsnvQCOrwbeQ3T7OZPUL5KgW3EMHCKk="
+        }
+      ]
+    },
+    {
+      "Route": "js/app.rit4cf5tx0.js.gz",
+      "AssetFile": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\Debug\\net9.0\\compressed\\lcfvqi2dbf-rit4cf5tx0.gz",
+      "Selectors": [],
+      "ResponseHeaders": [
+        {
+          "Name": "Accept-Ranges",
+          "Value": "bytes"
+        },
+        {
+          "Name": "Content-Length",
+          "Value": "1099"
+        },
+        {
+          "Name": "Content-Type",
+          "Value": "text/javascript"
+        },
+        {
+          "Name": "ETag",
+          "Value": "\"iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c=\""
+        },
+        {
+          "Name": "Last-Modified",
+          "Value": "Sun, 23 Nov 2025 18:22:22 GMT"
+        },
+        {
+          "Name": "Cache-Control",
+          "Value": "max-age=31536000, immutable"
+        },
+        {
+          "Name": "Content-Encoding",
+          "Value": "gzip"
+        },
+        {
+          "Name": "Vary",
+          "Value": "Content-Encoding"
+        }
+      ],
+      "EndpointProperties": [
+        {
+          "Name": "fingerprint",
+          "Value": "rit4cf5tx0"
+        },
+        {
+          "Name": "label",
+          "Value": "js/app.js.gz"
+        },
+        {
+          "Name": "integrity",
+          "Value": "sha256-iQxE95nbTnB9syxbqHIPWv5mjtJZRNOAMkZ8JLhe66c="
+        }
+      ]
+    }
+  ]
+}

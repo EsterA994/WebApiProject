@@ -1,0 +1,37 @@
+{
+  "Files": [
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css",
+      "PackagePath": "staticwebassets\\css\\style.css"
+    },
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html",
+      "PackagePath": "staticwebassets\\index.html"
+    },
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js",
+      "PackagePath": "staticwebassets\\js\\app.js"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MyJewelry.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssetEndpoints.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MyJewelry.Microsoft.AspNetCore.StaticWebAssets.props",
+      "PackagePath": "build\\Microsoft.AspNetCore.StaticWebAssets.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.build.MyJewelry.props",
+      "PackagePath": "build\\MyJewelry.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildMultiTargeting.MyJewelry.props",
+      "PackagePath": "buildMultiTargeting\\MyJewelry.props"
+    },
+    {
+      "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.buildTransitive.MyJewelry.props",
+      "PackagePath": "buildTransitive\\MyJewelry.props"
+    }
+  ],
+  "ElementsToRemove": []
+}

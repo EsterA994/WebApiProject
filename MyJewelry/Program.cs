@@ -1,8 +1,6 @@
 
 using MyJewelry.Interfaces;
 using MyJewelry.Services;
-// using System.Collections.Generic;
-
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,6 +21,11 @@ if (app.Environment.IsDevelopment())
         options.SwaggerEndpoint("/openapi/v1.json", "v1");
     });
 }
+
+/*js*/
+app.UseDefaultFiles();
+app.UseStaticFiles();
+/*js (remove "launchUrl" from Properties\launchSettings.json*/
 
 app.UseHttpsRedirection();
 

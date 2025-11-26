@@ -21,7 +21,7 @@ public class JewelryService : IJewelryService
             new Jewelry { Id = 1, Name = "pearl necklace", Type = "Pearl", Category = "chain", Price = 5000},
             new Jewelry { Id = 2, Name = "earrings", Type = "Gold", Category = "earrings", Price = 1000},
             new Jewelry { Id = 3, Name = "bracelet", Type = "Silver", Category = "bracelet", Price = 1200},
-            new Jewelry { Id = 3, Name = "dimond ring", Type = "Rhodium", Category = "ring", Price = 6500}
+            new Jewelry { Id = 4, Name = "dimond ring", Type = "Rhodium", Category = "ring", Price = 6500}
         };
     }
 

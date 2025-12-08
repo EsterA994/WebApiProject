@@ -1,16 +1,28 @@
 {
   "Files": [
     {
-      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\style.css",
-      "PackagePath": "staticwebassets\\css\\style.css"
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\jewelry.css",
+      "PackagePath": "staticwebassets\\css\\jewelry.css"
+    },
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\css\\users.css",
+      "PackagePath": "staticwebassets\\css\\users.css"
+    },
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\html\\user.html",
+      "PackagePath": "staticwebassets\\html\\user.html"
     },
     {
       "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\index.html",
       "PackagePath": "staticwebassets\\index.html"
     },
     {
-      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\app.js",
-      "PackagePath": "staticwebassets\\js\\app.js"
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\jewelry.js",
+      "PackagePath": "staticwebassets\\js\\jewelry.js"
+    },
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\users.js",
+      "PackagePath": "staticwebassets\\js\\users.js"
     },
     {
       "Id": "obj\\Debug\\net9.0\\staticwebassets\\msbuild.MyJewelry.Microsoft.AspNetCore.StaticWebAssetEndpoints.props",

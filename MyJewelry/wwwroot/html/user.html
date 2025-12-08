@@ -4,28 +4,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jewelry</title>
+    <title>User</title>
     <link rel="stylesheet" href="../css/jewelry.css">
 </head>
 
 <body>
 
-    <h1>Jewelry</h1>
+    <h1>user</h1>
 
     <h3>Add</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-        <input type="text" id="add-name" placeholder="New jewelry">
+        <input type="text" id="add-name" placeholder="New user">
         <input type="submit" value="Add">
     </form>
 
     <div id="editForm">
         <h3>Edit</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input type="hidden" id="edit-id">
+            <input id="edit-id">
             <input type="text" id="edit-name">
-            <input type="text" id="edit-category">
-            <input type="text" id="edit-type">
-            <input type="text" id="edit-price">
+            <input type="text" id="edit-age">
+            <select id="edit-gender">
+                <option value="male">male</option>
+                <option value="female">female</option>
+            </select>
             <input type="submit" value="Save">
             <a onclick="closeInput()" aria-label="Close">&#10006;</a>
         </form>
@@ -35,19 +37,19 @@
 
     <table>
         <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Price</th>
+            <th>Id</th>
+            <th>name</th>
+            <th>Age</th>
+            <th>Gender</th>
             <th></th>
             <th></th>
         </tr>
-        <tbody id="jewelry"></tbody>
+        <tbody id="user"></tbody>
     </table>
 
-    <a href="./html/user.html">go to users</a>
+    <a href="../index.html">go to jewelry</a>
 
-    <script src="../js/jewelry.js" asp-append-version></script>
+    <script src="../js/users.js" asp-append-version></script>
     <script type="text/javascript">
         getItems();
     </script>

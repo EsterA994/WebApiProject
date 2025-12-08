@@ -1,5 +1,5 @@
-const uri = '/Jewelry';
-let jewelries = [];
+const uri = '/User';
+let users = [];
 
 function getItems() {
     fetch(uri)
@@ -11,12 +11,12 @@ function getItems() {
 function addItem() {
     const addNameTextbox = document.getElementById('add-name');
 
-    const item = {
+    const user = {
         name: addNameTextbox.value.trim(),
-        category: '',
-        type: '',
-        price: 0,
+        age: 0,
+        gender: '',
     };
+
 
     fetch(uri, {
             method: 'POST',
@@ -24,14 +24,14 @@ function addItem() {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify(user)
         })
         .then(response => response.json())
         .then(() => {
             getItems();
             addNameTextbox.value = '';
         })
-        .catch(error => console.error('Unable to add item.', error));
+        .catch(error => console.error('Unable to add user.', error));
 }
 
 function deleteItem(id) {
@@ -39,42 +39,40 @@ function deleteItem(id) {
             method: 'DELETE'
         })
         .then(() => getItems())
-        .catch(error => console.error('Unable to delete item.', error));
+        .catch(error => console.error('Unable to delete user.', error));
 }
 
 function displayEditForm(id) {
-    const item = jewelries.find(item => item.id === id);
+    const user = users.find(u => u.id === id);
 
-    document.getElementById('edit-id').value = item.id;
-    document.getElementById('edit-name').value = item.name;
-    document.getElementById('edit-category').value = item.category;
-    document.getElementById('edit-type').value = item.type;
-    document.getElementById('edit-price').value = item.price;
+    document.getElementById('edit-id').value = user.id;
+    document.getElementById('edit-name').value = user.name;
+    document.getElementById('edit-age').value = user.age;
+    document.getElementById('edit-gender').value = user.gender;
     document.getElementById('editForm').style.display = 'block';
 }
 
 function updateItem() {
-    const itemId = document.getElementById('edit-id').value.trim();
-    console.log(itemId);
-    const item = {
-        id: parseInt(itemId, 10),
+    const userId = document.getElementById('edit-id').value.trim();
+    console.log(userId);
+    const user = {
+        id: parseInt(userId, 10),
         name: document.getElementById('edit-name').value.trim(),
-        category: document.getElementById('edit-category').value.trim(),
-        type: document.getElementById('edit-type').value.trim(),
-        price: document.getElementById('edit-price').value.trim(),
+        age: document.getElementById('edit-age').value.trim(),
+        gender: document.getElementById('edit-gender').value.trim(),
     };
 
 
-    fetch(`${uri}/${itemId}`, {
+    fetch(`${uri}/${userId}`, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(item)
+            body: JSON.stringify(user)
         })
         .then(() => getItems())
-        .catch(error => console.error('Unable to update item.', error));
+        .catch(error => console.error('Unable to update user.', error));
 
     closeInput();
 
@@ -85,51 +83,51 @@ function closeInput() {
     document.getElementById('editForm').style.display = 'none';
 }
 
-function displayCount(itemCount) {
-    const name = (itemCount === 1) ? 'jewelry:' : 'jewelry kinds:';
+function displayCount(userCount) {
+    const name = (userCount === 1) ? 'user:' : 'users :';
 
-    document.getElementById('counter').innerText = `${itemCount} ${name}`;
+    document.getElementById('counter').innerText = `${userCount} ${name}`;
 }
 
 
 function displayItems(data) {
-    const tBody = document.getElementById('jewelry');
+    const tBody = document.getElementById('user');
     tBody.innerHTML = '';
 
     displayCount(data.length);
 
     const button = document.createElement('button');
 
-    data.forEach(item => {
+    data.forEach(user => {
 
-        console.log(item+"----");
+        console.log(user+"----");
         
 
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${item.id})`);
+        editButton.setAttribute('onclick', `displayEditForm(${user.id})`);
 
         let deleteButton = button.cloneNode(false);
         deleteButton.innerText = 'Delete';
-        deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
+        deleteButton.setAttribute('onclick', `deleteItem(${user.id})`);
 
         let tr = tBody.insertRow();
         
 
         let td1 = tr.insertCell(0);
-        let textNode = document.createTextNode(item.name);
+        let textNode = document.createTextNode(user.id);
         td1.appendChild(textNode);
 
         let td2 = tr.insertCell(1);
-        let textNode2 = document.createTextNode(item.category);
+        let textNode2 = document.createTextNode(user.name);
         td2.appendChild(textNode2);
 
         let td3 = tr.insertCell(2);
-        let textNode3 = document.createTextNode(item.type);
+        let textNode3 = document.createTextNode(user.age);
         td3.appendChild(textNode3);
 
         let td4 = tr.insertCell(3);
-        let textNode4 = document.createTextNode(item.price);
+        let textNode4 = document.createTextNode(user.gender);
         td4.appendChild(textNode4);
 
         let td5 = tr.insertCell(4);
@@ -139,5 +137,5 @@ function displayItems(data) {
         td6.appendChild(deleteButton);
     });
 
-    jewelries = data;
+    users = data;
 }

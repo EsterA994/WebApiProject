@@ -1,0 +1,30 @@
+[
+    {
+        "Id": 1,
+        "Name": "pearl necklace",
+        "Type": "Pearl",
+        "Category": "chain",
+        "Price": 5000
+    },
+    {
+        "Id": 2,
+        "Name": "earrings",
+        "Type": "Gold",
+        "Category": "earrings",
+        "Price": 1000
+    },
+    {
+        "Id": 3,
+        "Name": "bracelet",
+        "Type": "Silver",
+        "Category": "bracelet",
+        "Price": 1200
+    },
+    {
+        "Id": 4,
+        "Name": "dimond ring",
+        "Type": "Rhodium",
+        "Category": "ring",
+        "Price": 6500
+    }
+]

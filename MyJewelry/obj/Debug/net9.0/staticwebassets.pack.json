@@ -9,6 +9,10 @@
       "PackagePath": "staticwebassets\\css\\users.css"
     },
     {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\html\\login.html",
+      "PackagePath": "staticwebassets\\html\\login.html"
+    },
+    {
       "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\html\\user.html",
       "PackagePath": "staticwebassets\\html\\user.html"
     },
@@ -19,6 +23,10 @@
     {
       "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\jewelry.js",
       "PackagePath": "staticwebassets\\js\\jewelry.js"
+    },
+    {
+      "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\login.js",
+      "PackagePath": "staticwebassets\\js\\login.js"
     },
     {
       "Id": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\wwwroot\\js\\users.js",

@@ -31,7 +31,7 @@ function addItem() {
             getItems();
             addNameTextbox.value = '';
         })
-        .catch(error => console.error('Unable to add user.', error));
+        .catch(error => console.error('Unable to post.', error));
 }
 
 function deleteItem(id) {

@@ -1,7 +1,20 @@
+// const Loginn=()=>{
+    // if (JSON.parse(localStorage.length===0)){
+    //     window.location.href='html/login.html';
+        // getItems();
+    // }
+//     // else
+// window.location.href='./html/login.html';
+// }
+
+
 const uri = '/Jewelry';
 let jewelries = [];
 
 function getItems() {
+    if (JSON.parse(localStorage.length === 0)) {
+        window.location.href = 'html/login.html';
+    }
     fetch(uri)
         .then(response => response.json())
         .then(data => displayItems(data))
@@ -21,13 +34,13 @@ function addItem() {
     console.log(item);
 
     fetch(uri, {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        })
+        method: 'POST',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+    })
         .then(response => response.json())
         .then(() => {
             getItems();
@@ -38,8 +51,8 @@ function addItem() {
 
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
-            method: 'DELETE'
-        })
+        method: 'DELETE'
+    })
         .then(() => getItems())
         .catch(error => console.error('Unable to delete item.', error));
 }
@@ -68,13 +81,13 @@ function updateItem() {
 
 
     fetch(`${uri}/${itemId}`, {
-            method: 'PUT',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(item)
-        })
+        method: 'PUT',
+        headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(item)
+    })
         .then(() => getItems())
         .catch(error => console.error('Unable to update item.', error));
 
@@ -104,8 +117,8 @@ function displayItems(data) {
 
     data.forEach(item => {
 
-        console.log(item+"----");
-        
+        console.log(item + "----");
+
 
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
@@ -116,7 +129,7 @@ function displayItems(data) {
         deleteButton.setAttribute('onclick', `deleteItem(${item.id})`);
 
         let tr = tBody.insertRow();
-        
+
 
         let td1 = tr.insertCell(0);
         let textNode = document.createTextNode(item.name);
@@ -142,4 +155,6 @@ function displayItems(data) {
     });
 
     jewelries = data;
+
+
 }

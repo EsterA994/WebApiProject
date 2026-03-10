@@ -12,6 +12,7 @@ public class JewelryService : IJewelryService
 {
     
     private List<Jewelry> list;
+    
 
 
     public JewelryService()

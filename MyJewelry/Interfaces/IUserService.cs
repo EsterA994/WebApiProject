@@ -6,18 +6,18 @@ using MyJewelry.Models;
 
 namespace MyJewelry.Interfaces;
 
-public interface IUserService
+public interface IUserService:IJewelryRepository<User>
 {
 
-    public List<User> Get();
+    // public List<User> Get();
 
-    public User find(int id);
+    // public User find(int id);
 
-    public User Get(int id);
+    // public User Get(int id);
 
-    public User Create(User newUser);
+    // public User Create(User newUser);
 
-    public bool Update(int id, User newUser);
+    // public bool Update(int id, User newUser);
 
-    public bool Delete(int id);
+    // public bool Delete(int id);
 }

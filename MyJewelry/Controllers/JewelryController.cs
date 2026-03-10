@@ -10,6 +10,7 @@ namespace MyJewelry.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[Authorize]
 public class JewelryController : ControllerBase
 {
     IJewelryService jewelryService;

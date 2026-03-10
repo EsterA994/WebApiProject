@@ -26,12 +26,14 @@ public class UserController : ControllerBase
     [Route("[action]")]
     public ActionResult<String> Login([FromBody] User User)
     {
-        //var query = $"select * from users where idnumber = @idnumber";
-        // if (User.Name != "Esty"
-        // || User.Id != 1272)
-        // {
-        //     return Unauthorized();
-        // }
+        var dt = DateTime.Now;
+
+        var query = $"select * from users where idnumber = @idnumber";
+        if (User.Name != "Esty"
+        || User.Id != 1272)
+        {
+            return Unauthorized();
+        }
 
         var claims = new List<Claim>
             {

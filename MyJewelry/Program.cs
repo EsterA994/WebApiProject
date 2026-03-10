@@ -2,6 +2,7 @@
 using MyJewelry.Interfaces;
 using MyJewelry.Services;
 using MyJewelry;
+// using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 

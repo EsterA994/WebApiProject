@@ -861,23 +861,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user\\.nuget\\packages\\": {},
+    "C:\\Users\\huser\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\Core\\שלי\\WebApiAspNetCore\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
+      "projectUniqueName": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj",
       "projectName": "MyJewelry",
-      "projectPath": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\Core\\שלי\\WebApiAspNetCore\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
-      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\Core\\שלי\\WebApiAspNetCore\\WebApiProject\\MyJewelry\\obj\\",
+      "projectPath": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\MyJewelry.csproj",
+      "packagesPath": "C:\\Users\\huser\\.nuget\\packages\\",
+      "outputPath": "Z:\\יד תשפו\\אינהורן אסתר\\WebApi\\MyJewelry\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\huser\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -886,7 +886,6 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
-        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {

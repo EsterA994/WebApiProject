@@ -4,30 +4,32 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 
 
-namespace MyJewelry.Services;
-
-public class ActiveUserService : IActiveUser
+namespace MyJewelry.Services
 {
-    public User ActiveUser { get; private set; }
-    public ActiveUserService(IHttpContextAccessor context)
+    public class ActiveUserService : IActiveUser
     {
-        var userId = context?.HttpContext?.User?.FindFirst("Id");
-        if (userId != null)
+        public User ActiveUser { get; private set; }
+        public ActiveUserService(IHttpContextAccessor context)
         {
-            ActiveUser = new User
+            var userId = context?.HttpContext?.User?.FindFirst("Id");
+            if (userId != null)
             {
-                Id = int.Parse(userId.Value),
-                Username = "test"
-            };
+                ActiveUser = new User
+                {
+                    Id = int.Parse(userId.Value),
+                    Username = "test"
+                };
+            }
         }
-    }
-}
 
-public static partial class MyJewelryExtensions
-{
-    public static IServiceCollection AddActiveUser(this IServiceCollection services)
+    }
+
+    public static partial class MyJewelryExtensions
     {
-        services.AddScoped<IActiveUser, ActiveUserService>();
-        return services;
+        public static IServiceCollection AddActiveUser(this IServiceCollection services)
+        {
+            services.AddScoped<IActiveUser, ActiveUserService>();
+            return services;
+        }
     }
 }

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MyJewelry.Models;
 using MyJewelry.Interfaces;
+using Microsoft.Extensions.DependencyInjection;//
 
 
 namespace MyJewelry.Services;
@@ -11,26 +12,27 @@ namespace MyJewelry.Services;
 public class JewelryService : IJewelryService
 {
     
-    private List<Jewelry> list;
-    
+    private readonly IJewelryRepository repository;
+    private readonly int activeUserId;
+    private readonly string activeUserName;
 
 
-    public JewelryService()
+    public JewelryService(IJewelryRepository repository, IActiveUser activeUser)
     {
-        list = new List<Jewelry>
-        {
-            new Jewelry { Id = 1, Name = "pearl necklace", Type = "Pearl", Category = "chain", Price = 5000},
-            new Jewelry { Id = 2, Name = "earrings", Type = "Gold", Category = "earrings", Price = 1000},
-            new Jewelry { Id = 3, Name = "bracelet", Type = "Silver", Category = "bracelet", Price = 1200},
-            new Jewelry { Id = 4, Name = "dimond ring", Type = "Rhodium", Category = "ring", Price = 6500}
-        };
+        this.repository = repository;
+        var user = activeUser.ActiveUser;
+        if(user is null)
+        throw new System.InvalidOperationException("Active user is required");
+        this.activeUserId = user.Id;
+        this.activeUserName = user.Name;
     }
 
 
     public List<Jewelry> Get()
-    {
-        return list;
-    }
+        => repository
+            .GetAll()
+            .Where(p => p.UserId == activeUserId)
+            .ToList();
 
     public Jewelry find(int id)
     {
@@ -38,49 +40,53 @@ public class JewelryService : IJewelryService
 
     }
 
-    public Jewelry Get(int id) => find(id);
+    public Jewelry Get(int id){ 
+        var jewelry = repository.Get(id);
+        return jewelry?.UserId == activeUserId ? jewelry : null;
+    }
 
-
-    public Jewelry Create(Jewelry newJewelry)
+    public Jewelry Create(Jewelry jewelry)
     {
-        var maxId = list.Max(p => p.Id);
-        newJewelry.Id = maxId + 1;
-        list.Add(newJewelry);
-        return newJewelry;
+        jewelry.UserId = activeUserId;
+        repository.Add(jewelry);
+        BroadcastActivity("added", jewelry);
     }
 
 
-    public bool Update(int id, Jewelry newJewelry)
+    public bool Update(int id, Jewelry jewelry)
     {
-        var jewelry = find(id);
-        if (jewelry == null)
-            return false;
-        if (jewelry.Id != newJewelry.Id)
-            return false;
+        var existing = repository.Get(jewelry.Id);
+            if (existing?.UserId != activeUserId)
+                return false;
 
-        var index = list.IndexOf(jewelry);
-        list[index] = newJewelry;
-
+            jewelry.UserId = activeUserId;
+            repository.Update(jewelry);
+        // QueueActivityBroadcast(jewelry);
         return true;
     }
 
     public bool Delete(int id)
     {
-        var jewelry = find(id);
-        if (jewelry == null)
+        var jewelry = Get(id);
+        if (jewelry is null)
             return false;
-        list.Remove(jewelry);
+
+        if (jewelry.UserId != activeUserId)
+                return false;
+
+        repository.Delete(id);
         return true;
     }
 
-
+    public int Count => GetAll().Count;
 }
 
     
-public static class JewelryServiceExtension
+public static class JewelryExtension
 {
     public static void addJewelryService(this IServiceCollection services)
     {
-        services.AddSingleton<IJewelryService, JewelryService>();
+        services.AddSingleton<IJewelryRepository, JewelryRepository>();
+        services.AddScoped<IJewelryService, JewelryService>();
     }
 }

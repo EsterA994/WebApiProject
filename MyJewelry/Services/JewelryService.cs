@@ -12,12 +12,12 @@ namespace MyJewelry.Services;
 public class JewelryService : IJewelryService
 {
     
-    private readonly IJewelaryRepository repository;
+    private readonly IJewelryRepository repository;
     private readonly int activeUserId;
     private readonly string activeUserName;
 
 
-    public JewelryService(IJewelaryRepository repository, IActiveUser activeUser)
+    public JewelryService(IJewelryRepository repository, IActiveUser activeUser)
     {
         this.repository = repository;
         var user = activeUser.ActiveUser;

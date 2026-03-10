@@ -4,66 +4,49 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MyJewelry.Models;
 using MyJewelry.Interfaces;
+using System.Text.Json;
 
 
 namespace MyJewelry.Services;
 
 public class UserRepository : IUserRepository
 {
-    
-    private  List<User> list;
-        private readonly string filePath;
-        private readonly string filePath;
+
+    private List<User> list;
+    private readonly string filePath;
 
 
-    public UserRepository()
+    public UserRepository(IWebHostEnvironment webHost)
     {
-        filePath=filePath.Combine(Directory.GetCurrentDirectory(), "Data", "users.json");
-            using var jsonFile = File.OpenText(filePath);
-            list=JsonSerializer.Deserialize<List<User>>(jsonFile.ReadToEnd(),
+        filePath = Path.Combine(webHost.ContentRootPath, "Data", "users.json");
+        using var jsonFile = File.OpenText(filePath);
+        list = JsonSerializer.Deserialize<List<User>>(jsonFile.ReadToEnd(),
             new JsonSerializerOptions
             {
-                PropertyNameCaseInsensitive = true,
-                WriteIndented = true
+                PropertyNameCaseInsensitive = true
             }) ?? new List<User>();
-        // {
-        //     // new User { Id = 1, Name = "Sara Cohen", Age = 18, Gender = "male"},
-        //     // new User { Id = 2, Name = "Tamer Levin", Age = 18, Gender = "male"},
-        //     // new User { Id = 4, Name = "Dan Glik", Age = 18, Gender = "female"},
-        //     // new User { Id = 3, Name = "Avigail Beno", Age = 18, Gender = "male"}
-        // };
-
     }
 
     private void Save() => File.WriteAllText(filePath, JsonSerializer.Serialize(list));
 
-    public List<User> Get()
+    public List<User> Get()=>list;
+
+
+    public User Get(int id) => list.FirstOrDefault(p => p.Id == id);
+
+
+    public int Create(User newUser)
     {
-        return list;
-    }
-
-    private User find(int id)
-    {
-        return list.FirstOrDefault(p => p.Id == id);
-
-    }
-
-    public User Get(int id) => find(id);
-
-
-    public User Create(User newUser)
-    {
-        var maxId = list.Max(p => p.Id);
-        newUser.Id = maxId + 1;
+        newUser.Id = list.Count == 0 ? 1 : list.Max(p => p.Id) + 1;
         list.Add(newUser);
-      Save();
-        return newUser;
+        Save();
+        return newUser.Id;
     }
 
 
-    public bool Update(int id, User newUser)
+    public bool Update(User newUser)
     {
-        var user = find(id);
+        var user = Get(newUser.Id);
         if (user == null)
             return false;
         if (user.Id != newUser.Id)
@@ -72,29 +55,19 @@ public class UserRepository : IUserRepository
         var index = list.IndexOf(user);
         list[index] = newUser;
         Save();
-
         return true;
     }
 
     public bool Delete(int id)
     {
-        var user = find(id);
+        var user = Get(id);
         if (user == null)
             return false;
         list.Remove(user);
         Save();
-
-        return true;
+        return true;    
     }
-
 
 }
 
-    
-public static class UserServiceExtension
-{
-    public static void addUserService(this IServiceCollection services)
-    {
-        services.AddSingleton<IUserService, UserService>();
-    }
-}
+

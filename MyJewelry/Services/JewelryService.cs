@@ -11,7 +11,7 @@ namespace MyJewelry.Services;
 
 public class JewelryService : IJewelryService
 {
-    
+
     private readonly IJewelryRepository repository;
     private readonly int activeUserId;
     private readonly string activeUserName;
@@ -21,8 +21,8 @@ public class JewelryService : IJewelryService
     {
         this.repository = repository;
         var user = activeUser.ActiveUser;
-        if(user is null)
-        throw new System.InvalidOperationException("Active user is required");
+        if (user is null)
+            throw new System.InvalidOperationException("Active user is required");
         this.activeUserId = user.Id;
         this.activeUserName = user.Name;
     }
@@ -30,61 +30,57 @@ public class JewelryService : IJewelryService
 
     public List<Jewelry> Get()
         => repository
-            .GetAll()
+            .Get()
             .Where(p => p.UserId == activeUserId)
             .ToList();
 
-    public Jewelry find(int id)
+    public Jewelry Get(int id)
     {
-        return list.FirstOrDefault(p => p.Id == id);
-
-    }
-
-    public Jewelry Get(int id){ 
         var jewelry = repository.Get(id);
         return jewelry?.UserId == activeUserId ? jewelry : null;
     }
 
-    public Jewelry Create(Jewelry jewelry)
+    public int Create(Jewelry jewelry)
     {
         jewelry.UserId = activeUserId;
-        repository.Add(jewelry);
-        BroadcastActivity("added", jewelry);
+        return repository.Create(jewelry);
+        // BroadcastActivity("added", jewelry);
     }
 
 
-    public bool Update(int id, Jewelry jewelry)
+    public bool Update(Jewelry jewelry)
     {
         var existing = repository.Get(jewelry.Id);
-            if (existing?.UserId != activeUserId)
-                return false;
+        if (existing?.UserId != activeUserId)
+            return false;
 
-            jewelry.UserId = activeUserId;
-            repository.Update(jewelry);
+        jewelry.UserId = activeUserId;
+        repository.Update(jewelry);
         // QueueActivityBroadcast(jewelry);
         return true;
     }
 
-    public bool Delete(int id)
+    public bool  Delete(int id)
     {
         var jewelry = Get(id);
         if (jewelry is null)
             return false;
 
         if (jewelry.UserId != activeUserId)
-                return false;
+            return false;
 
         repository.Delete(id);
         return true;
+
     }
 
-    public int Count => GetAll().Count;
+    public int Count => Get().Count;
 }
 
-    
+
 public static class JewelryExtension
 {
-    public static void addJewelryService(this IServiceCollection services)
+    public static void AddJewelryService(this IServiceCollection services)
     {
         services.AddSingleton<IJewelryRepository, JewelryRepository>();
         services.AddScoped<IJewelryService, JewelryService>();

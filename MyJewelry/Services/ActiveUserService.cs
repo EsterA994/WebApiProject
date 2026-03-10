@@ -17,7 +17,7 @@ namespace MyJewelry.Services
                 ActiveUser = new User
                 {
                     Id = int.Parse(userId.Value),
-                    Username = "test"
+                    Name = "test"
                 };
             }
         }

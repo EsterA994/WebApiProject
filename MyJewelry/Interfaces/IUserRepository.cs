@@ -6,8 +6,7 @@ using MyJewelry.Models;
 
 namespace MyJewelry.Interfaces;
 
-public interface IUserService:ICrud<User>
+public interface IUserRepository : ICrud<User>
 {
-    
-    int Count { get; }
+
 }

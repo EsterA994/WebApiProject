@@ -6,6 +6,7 @@ using MyJewelry.Services;
 using MyJewelry.Models;
 using MyJewelry.Interfaces;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyJewelry.Controllers;
 
@@ -35,24 +36,31 @@ public class UserController : ControllerBase
             return Unauthorized();
         }
 
+        // var claims = new List<Claim>
+        //     {
+        //         new Claim("username", User.Name),
+        //         new Claim("type", "User"),
+        //     };
         var claims = new List<Claim>
-            {
-                new Claim("username", User.Name),
-                new Claim("type", "User"),
-            };
-
+        {
+            new Claim("Id", User.Id.ToString()),
+            new Claim(ClaimTypes.Role, "Admin"),
+            new Claim("Name", User.Name)
+        };
         var token = JewelryTokenService.GetToken(claims);
 
         return new OkObjectResult(JewelryTokenService.WriteToken(token));
     }
 
     [HttpGet()]
+    [Authorize(Roles = "Admin")]
     public ActionResult<IEnumerable<User>> Get()
     {
         return userService.Get();
     }
 
     [HttpGet("{id}")]
+    [Authorize(Roles = "Admin")]
     public ActionResult<User> Get(int id)
     {
         var user = userService.Get(id);
@@ -64,19 +72,20 @@ public class UserController : ControllerBase
     [HttpPost]
     public ActionResult Create(User newUser)
     {
-        var postedUser = userService.Create(newUser);
-        return CreatedAtAction(nameof(Create), new { id = postedUser.Id });
+        var userId = userService.Create(newUser);
+        return CreatedAtAction(nameof(Get), new { id = userId }, newUser);
     }
 
     [HttpPut("{id}")]
     public ActionResult Update(int id, User newUser)
     {
-        var user = userService.find(id);
-        if (user == null)
-            return NotFound();
-        if (user.Id != newUser.Id)
+        if (id != newUser.Id)
             return BadRequest();
-        userService.Update(id, newUser);
+
+        var success = userService.Update(newUser);
+
+        if (!success)
+            return NotFound();
 
         return NoContent();
     }
@@ -84,7 +93,7 @@ public class UserController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)
     {
-        var user = userService.find(id);
+        var user = userService.Get(id);
 
         if (user == null)
             return NotFound();

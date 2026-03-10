@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using MyJewelry.Services;
 using MyJewelry.Models;
 using MyJewelry.Interfaces;
+using Microsoft.AspNetCore.Authorization;
 
 namespace MyJewelry.Controllers;
 
@@ -39,19 +40,25 @@ public class JewelryController : ControllerBase
     [HttpPost]
     public ActionResult Create(Jewelry newJewelry)
     {
-        var postedJewelry = jewelryService.Create(newJewelry);
-        return CreatedAtAction(nameof(Create), new { id = postedJewelry.Id });
+        var jewelryId = jewelryService.Create(newJewelry);
+
+        return CreatedAtAction(
+            nameof(Get),
+            new { id = jewelryId },
+            newJewelry
+        );
     }
 
     [HttpPut("{id}")]
     public ActionResult Update(int id, Jewelry newJewelry)
     {
-        var jewelry = jewelryService.find(id);
-        if (jewelry == null)
-            return NotFound();
-        if (jewelry.Id != newJewelry.Id)
+        if (id != newJewelry.Id)
             return BadRequest();
-        jewelryService.Update(id,newJewelry);
+
+        var success = jewelryService.Update(newJewelry);
+
+        if (!success)
+            return NotFound();
 
         return NoContent();
     }
@@ -59,8 +66,8 @@ public class JewelryController : ControllerBase
     [HttpDelete("{id}")]
     public ActionResult Delete(int id)
     {
-        var jewelry = jewelryService.find(id);
-        
+        var jewelry = jewelryService.Get(id);
+
         if (jewelry == null)
             return NotFound();
         jewelryService.Delete(id);

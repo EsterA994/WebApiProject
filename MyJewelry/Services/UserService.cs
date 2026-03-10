@@ -1,17 +1,16 @@
-using System.Linq;
+using System;
 using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using MyJewelry.Models;
+using System.Linq;
 using MyJewelry.Interfaces;
-
+using MyJewelry.Models;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace MyJewelry.Services;
 
 public class UserService : IUserService
 {
-     private readonly IUserRepository repository;
-    private List<User> list;
+    private readonly IUserRepository repository;
     private readonly int activeUserId;
     private readonly string activeUsername;
 
@@ -20,54 +19,34 @@ public class UserService : IUserService
     {
         this.repository = repository;
         var user = activeUser.ActiveUser;
-       if (user is null)
-         throw new System.InvalidOperationException("Active user is required");
+        if (user is null)
+            throw new System.InvalidOperationException("Active user is required");
         this.activeUserId = user.Id;
-        this.activeUsername = user.Username;
-    
-        // list = new List<User>
-        // {
-        //     new User { Id = 1, Name = "Sara Cohen", Age = 18, Gender = "male"},
-        //     new User { Id = 2, Name = "Tamer Levin", Age = 18, Gender = "male"},
-        //     new User { Id = 4, Name = "Dan Glik", Age = 18, Gender = "female"},
-        //     new User { Id = 3, Name = "Avigail Beno", Age = 18, Gender = "male"}
-        // };
+        this.activeUsername = user.Name;
     }
 
 
-    public List<User> Get()
+    public List<User> Get() => repository.Get();
+
+    public User Get(int id) => repository.Get(id);
+
+
+    public int Create(User newUser)
     {
-         => repository
-                .Get()
-                .Where(p => p.Id == activeUserId)
-                .ToList();
-    }
-
-    public User find(int id)
-    {
-        return repository.find(id);
-
-    }
-
-    public User Get(int id) => find(id);
-
-
-    public User Create(User newUser)
-    {
-       newUser.Id = activeUserId;
-            repository.Create(newUser);
-            BroadcastActivity("added", newUser);
+        newUser.Id = activeUserId;
+        return repository.Create(newUser);
+        // BroadcastActivity("added", newUser);
     }
 
 
-    public bool Update(int id, User newUser)
+    public bool Update(User newUser)
     {
-        var existing = repository.Get(id);
+        var existing = repository.Get(newUser.Id);
         if (existing == null)
             return false;
-            repository.Update(id, newUser);
-            QueueActivityBroadcast("updated", newUser);
-            return true;
+        return repository.Update(newUser);
+        // QueueActivityBroadcast("updated", newUser);
+
     }
 
     public bool Delete(int id)
@@ -75,26 +54,21 @@ public class UserService : IUserService
         var user = Get(id);
         if (user is null)
             return false;
-        if (user.UserId != activeUserId)
-                return salse;
-        repository.Delete(id);
-        BroadcastActivity("deleted", user);
-
-        return true;
+        if (user.Id != activeUserId)
+            return false;
+        return repository.Delete(id);
+        // BroadcastActivity("deleted", user);
     }
-        public int Count => Get().Count;
 
-
+    public int Count => Get().Count;
 }
 
-    
-public static class UserServiceExtension
-{
-    public static IServiceCollection addUserService(this IServiceCollection services)
-    {
-        services.AddSingleton<IUserService, UserRepository>();
-       services.AddScoped<IUserService, UserService>();
 
-        return services;
+public static partial class UserServiceExtension
+{
+    public static void AddUserService(this IServiceCollection services)
+    {
+        services.AddSingleton<IUserRepository, UserRepository>();
+        services.AddScoped<IUserService, UserService>();
     }
 }

@@ -4,11 +4,12 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using MyJewelry.Models;
 using MyJewelry.Interfaces;
+using System.Text.Json;
 
 
 namespace MyJewelry.Services;
 
-public class JewelryRepository : IJewelryService
+public class JewelryRepository : IJewelryRepository
 {
     
     private readonly List<Jewelry> jewelries;
@@ -30,34 +31,27 @@ public class JewelryRepository : IJewelryService
 
     public List<Jewelry> Get()=>jewelries;
 
-    public Jewelry find(int id)
+
+    public Jewelry Get(int id) => jewelries.FirstOrDefault(p => p.Id == id);
+
+    public int Create(Jewelry newJewelry)
     {
-        return jewelries.FirstOrDefault(p => p.Id == id);
-
-    }
-
-    public Jewelry Get(int id) => find(id);
-
-
-    public Jewelry Create(Jewelry newJewelry)
-    {
-        newJewelry.Id = list.Max(p => p.Id)+1;
+        newJewelry.Id = jewelries.Count == 0 ? 1 : jewelries.Max(p => p.Id) + 1;
         jewelries.Add(newJewelry);
         SaveChanges();
-        return newJewelry;
+        return newJewelry.Id;
     }
 
 
-    public bool Update(int id, Jewelry newJewelry)
+    public bool Update(Jewelry newJewelry)
     {
-        var index = jewelries.FindIndex(p => p.Id == id);
+        var index = jewelries.FindIndex(p => p.Id == newJewelry.Id);
         if (index == -1)
             return false;
 
         jewelries[index] = newJewelry;
         SaveChanges();
-
-        return true;
+        return true;     
     }
 
     public bool Delete(int id)
@@ -71,4 +65,5 @@ public class JewelryRepository : IJewelryService
         return true;
     }
 
+    public int Count => jewelries.Count;
 }

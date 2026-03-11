@@ -18,14 +18,17 @@ public class JewelryService : IJewelryService
 
 
     public JewelryService(IJewelryRepository repository, IActiveUser activeUser)
+{
+    this.repository = repository;
+    var user = activeUser.ActiveUser;
+    
+    // במקום לזרוק שגיאה כאן, פשוט נשמור את הנתונים אם הם קיימים
+    if (user != null)
     {
-        this.repository = repository;
-        var user = activeUser.ActiveUser;
-        if (user is null)
-            throw new System.InvalidOperationException("Active user is required");
         this.activeUserId = user.Id;
         this.activeUserName = user.Name;
     }
+}
 
 
     public List<Jewelry> Get()

@@ -12,17 +12,20 @@ public class UserService : IUserService
 {
     private readonly IUserRepository repository;
     private readonly int activeUserId;
-    private readonly string activeUsername;
+    private readonly string activeUserName;
 
 
     public UserService(IUserRepository repository, IActiveUser activeUser)
     {
         this.repository = repository;
         var user = activeUser.ActiveUser;
-        if (user is null)
-            throw new System.InvalidOperationException("Active user is required");
-        this.activeUserId = user.Id;
-        this.activeUsername = user.Name;
+
+        // במקום לזרוק שגיאה כאן, פשוט נשמור את הנתונים אם הם קיימים
+        if (user != null)
+        {
+            this.activeUserId = user.Id;
+            this.activeUserName = user.Name;
+        }
     }
 
 

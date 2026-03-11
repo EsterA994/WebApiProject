@@ -25,31 +25,21 @@ public class UserController : ControllerBase
 
     [HttpPost]
     [Route("[action]")]
-    public ActionResult<String> Login([FromBody] User User)
+    public ActionResult<string> Login([FromBody] LoginRequest user)
     {
-        var dt = DateTime.Now;
+        if (user.Name != "Esty" || user.Id != 1272)
+        return Unauthorized();
 
-        var query = $"select * from users where idnumber = @idnumber";
-        if (User.Name != "Esty"
-        || User.Id != 1272)
-        {
-            return Unauthorized();
-        }
+    var claims = new List<Claim>
+    {
+        new Claim("Id", user.Id.ToString()),
+        new Claim(ClaimTypes.Role, "Admin"),
+        new Claim("Name", user.Name)
+    };
 
-        // var claims = new List<Claim>
-        //     {
-        //         new Claim("username", User.Name),
-        //         new Claim("type", "User"),
-        //     };
-        var claims = new List<Claim>
-        {
-            new Claim("Id", User.Id.ToString()),
-            new Claim(ClaimTypes.Role, "Admin"),
-            new Claim("Name", User.Name)
-        };
-        var token = JewelryTokenService.GetToken(claims);
+    var token = JewelryTokenService.GetToken(claims);
 
-        return new OkObjectResult(JewelryTokenService.WriteToken(token));
+    return Ok(JewelryTokenService.WriteToken(token));
     }
 
     [HttpGet()]

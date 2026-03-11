@@ -1,8 +1,8 @@
 // const Loginn=()=>{
-    // if (JSON.parse(localStorage.length===0)){
-    //     window.location.href='html/login.html';
-        // getItems();
-    // }
+// if (JSON.parse(localStorage.length===0)){
+//     window.location.href='html/login.html';
+// getItems();
+// }
 //     // else
 // window.location.href='./html/login.html';
 // }
@@ -11,15 +11,39 @@
 const uri = '/Jewelry';
 let jewelries = [];
 
+// function getItems() {
+//     if (JSON.parse(localStorage.length === 0)) {
+//         window.location.href = 'html/login.html';
+//     }
+//     fetch(uri)
+//         .then(response => response.json())
+//         .then(data => displayItems(data))
+//         .catch(error => console.error('Unable to get items.', error));
+// }
+
 function getItems() {
-    if (JSON.parse(localStorage.length === 0)) {
+    const token = localStorage.getItem("token"); // שליפת הטוקן מהאחסון
+    if (!token) {
         window.location.href = 'html/login.html';
+        return;
     }
-    fetch(uri)
-        .then(response => response.json())
+    fetch(uri, {
+        method: 'GET',
+        headers: {
+            'Authorization': `Bearer ${token}`, // שליחת הטוקן
+            'Accept': 'application/json'
+        }
+    })
+        .then(response => {
+            if (response.status === 401) { // אם הטוקן לא תקף
+                window.location.href = 'html/login.html';
+            }
+            return response.json();
+        })
         .then(data => displayItems(data))
         .catch(error => console.error('Unable to get items.', error));
 }
+
 
 function addItem() {
     const addNameTextbox = document.getElementById('add-name');
@@ -37,7 +61,8 @@ function addItem() {
         method: 'POST',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}` // הוספת שורה זו
         },
         body: JSON.stringify(item)
     })

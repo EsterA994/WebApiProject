@@ -1,22 +1,23 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Jewelry</title>
-    <link rel="stylesheet" href="../css/jewelry.css">
-</head>
+  <link rel="stylesheet" href="../css/jewelry.css"></head>
 
 <body>
-    <a href="html/login.html"></a>
-
+    <a href="./html/login.html">Login</a>
 
     <h1>Jewelry</h1>
 
     <h3>Add</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
         <input type="text" id="add-name" placeholder="New jewelry">
+        <input type="text" id="add-category" placeholder="Category">
+        <input type="text" id="add-type" placeholder="Type">
+        <input type="text" id="add-price" placeholder="Price">
         <input type="submit" value="Add">
     </form>
 
@@ -24,7 +25,7 @@
         <h3>Edit</h3>
         <form action="javascript:void(0);" onsubmit="updateItem()">
             <input type="hidden" id="edit-id">
-            <input type="text" id="edit-name">
+            <input type="text" id="edit-name" placeholder="Jewelry Name">
             <input type="text" id="edit-category">
             <input type="text" id="edit-type">
             <input type="text" id="edit-price">
@@ -56,6 +57,89 @@
        getItems();
     </script>
 
+    </script>
+
+</body>
+
+</html> -->
+
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>חנות התכשיטים שלי</title>
+    <link rel="stylesheet" href="css/jewelry.css">
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        nav { margin-bottom: 20px; padding: 10px; background-color: #f4f4f4; }
+        table { width: 100%; border-collapse: collapse; margin-top: 20px; }
+        th, td { padding: 10px; border: 1px solid #ddd; text-align: right; }
+        th { background-color: #f8f8f8; }
+        .form-section { background: #fafafa; padding: 15px; border-radius: 5px; margin-bottom: 20px; }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <strong>תפריט:</strong>
+        <a href="html/login.html">התחברות</a> | 
+        <a href="html/user.html">ניהול משתמשים</a>
+    </nav>
+
+    <h1>קולקציית התכשיטים</h1>
+
+    <section class="form-section">
+        <h3>הוספת תכשיט חדש</h3>
+        <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
+            <input type="text" id="add-name" placeholder="שם התכשיט" required>
+            <input type="text" id="add-category" placeholder="קטגוריה">
+            <input type="text" id="add-type" placeholder="סוג">
+            <input type="number" id="add-price" placeholder="מחיר">
+            <input type="submit" value="הוסף פריט">
+        </form>
+    </section>
+
+    <div id="editForm" style="display:none;" class="form-section">
+        <h3>עריכת תכשיט</h3>
+        <form action="javascript:void(0);" onsubmit="updateItem()">
+            <input type="hidden" id="edit-id">
+            <input type="text" id="edit-name" placeholder="שם התכשיט">
+            <input type="text" id="edit-category" placeholder="קטגוריה">
+            <input type="text" id="edit-type" placeholder="סוג">
+            <input type="number" id="edit-price" placeholder="מחיר">
+            <input type="submit" value="שמור שינויים">
+            <button type="button" onclick="closeInput()">ביטול</button>
+        </form>
+    </div>
+
+    <p id="counter">טוען נתונים...</p>
+
+    <table>
+        <thead>
+            <tr>
+                <th>שם התכשיט</th>
+                <th>קטגוריה</th>
+                <th>סוג</th>
+                <th>מחיר</th>
+                <th>עריכה</th>
+                <th>מחיקה</th>
+            </tr>
+        </thead>
+        <tbody id="jewelry">
+            </tbody>
+    </table>
+
+    <script src="js/jewelry.js"></script>
+    <script>
+        // הרצת הפונקציה מיד עם טעינת הדף
+        window.onload = () => {
+            if (typeof getItems === 'function') {
+                getItems();
+            }
+        };
+    </script>
 </body>
 
 </html>

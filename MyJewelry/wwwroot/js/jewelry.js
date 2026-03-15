@@ -21,28 +21,67 @@ let jewelries = [];
 //         .catch(error => console.error('Unable to get items.', error));
 // }
 
+// function getItems() {
+//     const token = localStorage.getItem("token");
+
+//     if (!token) {
+//         console.warn("No token found, redirecting to login...");
+//         window.location.href = 'html/login.html';
+//         return;
+//     }
+
+//     fetch(uri, {
+//         method: 'GET',
+//         headers: {
+//             'Authorization': `Bearer ${token}`, // חשוב מאוד: הרווח אחרי ה-Bearer
+//             'Accept': 'application/json'
+//         }
+//     })
+//     .then(response => {
+//         if (response.status === 401) {
+//             // אם השרת אומר שהטוקן לא תקין, ננקה ונחזור ללוגין
+//             localStorage.removeItem("token");
+//             window.location.href = 'html/login.html';
+//             return;
+//         }
+//         return response.json();
+//     })
+//     .then(data => {
+//         if (data) displayItems(data);
+//     })
+//     .catch(error => console.error('Unable to get items.', error));
+// }
+
 function getItems() {
-    const token = localStorage.getItem("token"); // שליפת הטוקן מהאחסון
+    const token = localStorage.getItem("token");
+
     if (!token) {
-        window.location.href = 'html/login.html';
+        // ה- / בהתחלה אומר לדפדפן להתחיל משורש האתר
+        window.location.href = '/html/login.html';
         return;
     }
-    fetch(uri, {
+
+    fetch('/Jewelry', {
         method: 'GET',
         headers: {
-            'Authorization': `Bearer ${token}`, // שליחת הטוקן
+            'Authorization': `Bearer ${token}`,
             'Accept': 'application/json'
         }
     })
         .then(response => {
-            if (response.status === 401) { // אם הטוקן לא תקף
-                window.location.href = 'html/login.html';
+            if (response.status === 401) {
+                window.location.href = '/html/login.html';
+                return;
             }
             return response.json();
         })
-        .then(data => displayItems(data))
-        .catch(error => console.error('Unable to get items.', error));
+        .then(data => data && displayItems(data))
+        .catch(error => console.error('Error:', error));
 }
+
+
+getItems();
+
 
 
 function addItem() {
@@ -76,7 +115,10 @@ function addItem() {
 
 function deleteItem(id) {
     fetch(`${uri}/${id}`, {
-        method: 'DELETE'
+        method: 'DELETE',
+        headers: {
+            'Authorization': `Bearer ${localStorage.getItem("token")}` // חובה להוסיף!
+        }
     })
         .then(() => getItems())
         .catch(error => console.error('Unable to delete item.', error));
@@ -109,7 +151,8 @@ function updateItem() {
         method: 'PUT',
         headers: {
             'Accept': 'application/json',
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${localStorage.getItem("token")}` // חובה להוסיף!
         },
         body: JSON.stringify(item)
     })
@@ -141,10 +184,7 @@ function displayItems(data) {
     const button = document.createElement('button');
 
     data.forEach(item => {
-
-        console.log(item + "----");
-
-
+        
         let editButton = button.cloneNode(false);
         editButton.innerText = 'Edit';
         editButton.setAttribute('onclick', `displayEditForm(${item.id})`);

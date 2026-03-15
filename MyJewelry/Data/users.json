@@ -1,1 +1,40 @@
-[{"Id":1,"Name":"test123","Password":"","Role":"User"},{"Id":1274,"Name":"1","Password":"","Role":"User"},{"Id":1272,"Name":"Esty","Password":"","Role":"User"}]
+[{"Id":1272,"Name":"Esty","Password":"1","Role":"Admin"},{"Id":1275,"Name":"12","Password":"1","Role":"User"}]
+
+// עדיין יש כמה דברים ששכחת: אני אפרט מה צריך להיות למנהל ומה צריך להיות למשתמש רגיל:
+// כל משתמש רגיל / מנהל:
+// תוצג לו רשימת הפריטים שלו כולל אפשרות של מחיקת פריט, עריכת פריט, והוספת פריט חדש לרשימה.
+// כמו כן יהיה כפתור בו יהיה ניתן יהיה לראות את השדות האישיים של המשתמש וכן יהיה ניתן לערוך את הפרופיל האישי של המשתמש הנוכחי עצמו- כלומר לערוך את שם המשתמש והסיסמה, ובעת לחיצה על אישור עריכה מיד ישתנו הפרטים גם ב USER.JSON וגם בתצוגת המשתמש. 
+// משתמש מסוג מנהל:
+// כמו במשתמש רגיל , ובנוסף:
+// למנהל יהיה כפתור לתצוגת כל המשתמשים וכן הוא יכול לשלוף משתמש מסוים לפי ID וכן הוא יוכל ליצור משתמשים נוספים- ומיד הם יתווספו ב JSON ובתצוגת המשתמש. מלבד האפשרות של העריכה של פרטיו האישיים שלו.
+// למנהל גם ניתן לראות את רשימת כל התכשיטים של כל המשתמשים השמורים במערכת והוא גם יכול לערוך GET BY ID כדי לראות את תכשיטים של משתמש מסוים- אבל מנהל לא יכול לשנות או להוסיף תכשיטים של משתמש אחר.
+// תבצע את הנדרש ! וקבצים שאתה משנה תיתן לי את כל הקוד שלהם שאוכל לעשות העתק הדבק.
+// וכמובן על תיגע בלוגיקה שלא קשורה וכן שזה יעבוד כמו שצריך!
+// בנוסף אני מצרפת שוב את הדרישה מהמורה על מנת להוסיף בהירות על מה שביקשתי:
+// Server-side notes: 
+// • Only administrators see all users, and can add/delete users.  
+// • Administrator can edit all users, including all properties.  
+// Regular user can only edit their own user details, and cannot make themselves administrator. 
+// • Users can handle only their own items, and cannot see items of other users. 
+// • Both items and users should be saved in a JSON file. 
+// • Both items and users should be accessed via an injected service through an interface, so it would be 
+// easy to change it to a DB-based app.  
+// • Add a scoped service for active user, and inject it wherever you need, so the user ID, role, and other 
+// details will be available easily. 
+// • Add an extension method of IServiceCollection for an easy registration of all your services. 
+// • Use SignalR to notify a user's other active connections (different tabs/devices) when they 
+// add/update/delete items (track user connections in the Hub using OnConnectedAsync / 
+// OnDisconnectedAsync, and broadcast only to the same user's connection IDs using 
+// Clients.Clients(connectionIds)). 
+// • Each request should be written to a log file, including start date & time, name of controller & action, 
+// name of the logged-in user if there is one, and the duration of operation in milliseconds. Use a 
+// background worker with a message queue to write logs asynchronously without blocking request 
+// threads. 
+// Client-side notes: 
+// • The default page should show the user's items and allow add/update/delete operations. 
+// • If there is no logged-in user (no token saved in local storage, or the token expired), show a login 
+// page instead of the default page. 
+// • After add/update/delete items, show only a toast notification indicating the operation was 
+// successful. The grid should update only when SignalR notifies that an update happened. 
+// • If the user has administrative privileges, show a link from the items list page to the users list page, 
+// and vice versa. 

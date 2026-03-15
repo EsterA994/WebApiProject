@@ -26,6 +26,12 @@ public class UserService : IUserService
             this.activeUserId = user.Id;
             this.activeUserName = user.Name;
         }
+        else
+        {
+            // ערכי ברירת מחדל למקרה שאין משתמש מחובר (למשל בלוגין)
+            this.activeUserId = 0;
+            this.activeUserName = "Unknown";
+        }
     }
 
 

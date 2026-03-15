@@ -1,4 +1,58 @@
 <!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+    <meta charset="UTF-8">
+    <title>My Profile & User Management</title>
+    <link rel="stylesheet" href="../css/site.css">
+</head>
+<body>
+    <div class="container">
+        <div class="nav-bar">
+            <button class="btn-nav" onclick="window.location.href='../index.html'">Back to Jewelry</button>
+        </div>
+
+        <section class="form-section">
+            <h2 id="profile-title">My Personal Profile</h2>
+            <form id="profile-form" onsubmit="updateMyProfile(event)">
+                <input type="hidden" id="my-id">
+                <div style="margin-bottom: 10px;">
+                    <label>Name:</label><br>
+                    <input type="text" id="my-name" required>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label>New Password:</label><br>
+                    <input type="password" id="my-password" placeholder="Leave empty to keep current">
+                </div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
+
+        <div id="admin-section" class="hidden">
+            <hr>
+            <h1>Admin: All Users</h1>
+            <table id="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-list"></tbody>
+            </table>
+        </div>
+    </div>
+    <div id="toast" class="hidden"></div>
+    <script src="../js/users.js"></script>
+    <script>
+        // בטעינה: הבא את הפרופיל האישי. אם אדמין - הבא גם את כולם.
+        loadProfilePage();
+    </script>
+</body>
+</html>
+
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -54,4 +108,4 @@
 
 </body>
 
-</html>
+</html> -->

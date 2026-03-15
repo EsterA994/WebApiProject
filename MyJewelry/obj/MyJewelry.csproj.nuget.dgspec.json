@@ -1,23 +1,23 @@
 {
   "format": 1,
   "restore": {
-    "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\MyJewelry.csproj": {}
+    "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\MyJewelry.csproj": {}
   },
   "projects": {
-    "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\MyJewelry.csproj": {
+    "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\MyJewelry.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
+        "projectUniqueName": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
         "projectName": "MyJewelry",
-        "projectPath": "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
-        "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-        "outputPath": "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\obj\\",
+        "projectPath": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
+        "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
         ],
         "configFilePaths": [
-          "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
@@ -26,6 +26,7 @@
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "C:\\Program Files\\dotnet\\library-packs": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -90,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
         }
       }
     }

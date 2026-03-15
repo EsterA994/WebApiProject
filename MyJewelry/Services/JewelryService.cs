@@ -25,7 +25,7 @@ public class JewelryService : IJewelryService
         return repository.Get().Where(p => p.UserId == userId).ToList();
     }
 
-    public Jewelry? Get(int id)
+    public Jewelry Get(int id)
     {
         var userId = _activeUserService.ActiveUser?.Id ?? 0;
         var jewelry = repository.Get(id);

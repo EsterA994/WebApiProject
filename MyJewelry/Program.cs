@@ -102,8 +102,8 @@ app.UseStaticFiles();
 
 app.UseAuthentication();
 
-app.UseMyLogMiddleware();
 app.UseAuthorization();
+app.UseMyLogMiddleware();
 
 // Configure the HTTP request pipeline
 if (app.Environment.IsDevelopment())

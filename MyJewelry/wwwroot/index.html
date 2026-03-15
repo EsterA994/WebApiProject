@@ -1,69 +1,81 @@
-<!-- <!DOCTYPE html>
-<html lang="en">
-
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jewelry</title>
-  <link rel="stylesheet" href="../css/jewelry.css"></head>
-
+    <title>Jewelry Luxury Collection</title>
+    <link rel="stylesheet" href="css/site.css">
+</head>
 <body>
-    <a href="./html/login.html">Login</a>
+    <div class="container">
+        <div class="nav-bar">
+            <button class="btn-nav" onclick="logout()">Logout</button>
+            <button class="btn-nav" onclick="window.location.href='html/user.html'">My Profile</button>
+            <button class="btn-nav admin-only hidden" onclick="getAllItemsAdmin()">Admin: All Items</button>
+        </div>
 
-    <h1>Jewelry</h1>
+        <h1>Jewelry Collection</h1>
 
-    <h3>Add</h3>
-    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-        <input type="text" id="add-name" placeholder="New jewelry">
-        <input type="text" id="add-category" placeholder="Category">
-        <input type="text" id="add-type" placeholder="Type">
-        <input type="text" id="add-price" placeholder="Price">
-        <input type="submit" value="Add">
-    </form>
+        <section class="form-section">
+            <h3>Add New Piece</h3>
+            <form onsubmit="addItem(); return false;">
+                <input type="text" id="add-name" placeholder="Name" required>
+                <input type="text" id="add-category" placeholder="Category">
+                <input type="text" id="add-type" placeholder="Type">
+                <input type="number" id="add-price" placeholder="Price" required>
+                <input type="submit" value="Add to Collection">
+            </form>
+        </section>
 
-    <div id="editForm">
-        <h3>Edit</h3>
-        <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input type="hidden" id="edit-id">
-            <input type="text" id="edit-name" placeholder="Jewelry Name">
-            <input type="text" id="edit-category">
-            <input type="text" id="edit-type">
-            <input type="text" id="edit-price">
-            <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
-        </form>
+        <div id="editForm" class="hidden form-section">
+            <h3>Edit Jewelry</h3>
+            <form onsubmit="updateItem(); return false;">
+                <input type="hidden" id="edit-id">
+                <input type="text" id="edit-name" required>
+                <input type="text" id="edit-category">
+                <input type="text" id="edit-type">
+                <input type="number" id="edit-price" required>
+                <input type="submit" value="Update">
+                <button type="button" onclick="closeInput()" style="background:#ccc">Cancel</button>
+            </form>
+        </div>
+
+        <p id="counter">Discovering your items...</p>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Category</th>
+                    <th>Type</th>
+                    <th>Price ($)</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody id="jewelry"></tbody>
+        </table>
     </div>
 
-    <p id="counter"></p>
+    <div id="toast" class="hidden"></div>
 
-    <table>
-        <tr>
-            <th>Name</th>
-            <th>Category</th>
-            <th>Type</th>
-            <th>Price</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tbody id="jewelry"></tbody>
-    </table>
-    <a href="./html/login.html">go to login</a>
+    <div class="nav-bar">
+    <button class="btn-nav" onclick="logout()">Logout</button>
+    <button class="btn-nav" onclick="window.location.href='html/user.html'">My Profile</button>
+    <button id="admin-btn" class="btn-nav hidden" onclick="window.location.href='html/user.html'">Manage Users</button>
+</div>
 
-    <a href="./html/user.html">go to users</a>
+<script>
+    // בדיקה פשוטה בטעינה
+    if (localStorage.getItem("userRole") === "Admin") {
+        document.getElementById('admin-btn').classList.remove('hidden');
+    }
+</script>
 
-    <script src="../js/jewelry.js" asp-append-version></script>
-    <script type="text/javascript">
-    
-       getItems();
-    </script>
-
-    </script>
-
+    <script src="js/jewelry.js"></script>
+    <script>getItems();</script>
 </body>
+</html>
 
-</html> -->
-
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="he" dir="rtl">
 
 <head>
@@ -142,4 +154,4 @@
     </script>
 </body>
 
-</html>
+</html> -->

@@ -17,6 +17,7 @@
     <h3>Add</h3>
     <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
         <input type="text" id="add-name" placeholder="New user">
+        <input type="text" id="add-id" placeholder="user id">
         <input type="submit" value="Add">
     </form>
 
@@ -25,11 +26,7 @@
         <form action="javascript:void(0);" onsubmit="updateItem()">
             <input id="edit-id">
             <input type="text" id="edit-name">
-            <input type="text" id="edit-age">
-            <select id="edit-gender">
-                <option value="male">male</option>
-                <option value="female">female</option>
-            </select>
+            <input type="text" id="edit-password">
             <input type="submit" value="Save">
             <a onclick="closeInput()" aria-label="Close">&#10006;</a>
         </form>
@@ -41,8 +38,7 @@
         <tr>
             <th>Id</th>
             <th>name</th>
-            <th>Age</th>
-            <th>Gender</th>
+            <th>password</th>
             <th></th>
             <th></th>
         </tr>

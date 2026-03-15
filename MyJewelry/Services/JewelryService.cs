@@ -1,85 +1,66 @@
-using System.Linq;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Mvc;
-using System.Threading.Tasks;
-using MyJewelry.Models;
-using MyJewelry.Interfaces;
-using Microsoft.Extensions.DependencyInjection;//
 
+using System.Collections.Generic;
+using System.Linq;
+using Microsoft.Extensions.DependencyInjection;
+using MyJewelry.Interfaces;
+using MyJewelry.Models;
 
 namespace MyJewelry.Services;
 
 public class JewelryService : IJewelryService
 {
-
     private readonly IJewelryRepository repository;
-    private readonly int activeUserId;
-    private readonly string activeUserName;
-
+    private readonly IActiveUser _activeUserService; // זה המשתנה שהיה חסר
 
     public JewelryService(IJewelryRepository repository, IActiveUser activeUser)
-{
-    this.repository = repository;
-    var user = activeUser.ActiveUser;
-    
-    // במקום לזרוק שגיאה כאן, פשוט נשמור את הנתונים אם הם קיימים
-    if (user != null)
     {
-        this.activeUserId = user.Id;
-        this.activeUserName = user.Name;
+        this.repository = repository;
+        this._activeUserService = activeUser;
     }
-}
-
 
     public List<Jewelry> Get()
-        => repository
-            .Get()
-            .Where(p => p.UserId == activeUserId)
-            .ToList();
-
-    public Jewelry Get(int id)
     {
+        // שליפה דינמית של ה-ID בכל קריאה
+        var userId = _activeUserService.ActiveUser?.Id ?? 0;
+        return repository.Get().Where(p => p.UserId == userId).ToList();
+    }
+
+    public Jewelry? Get(int id)
+    {
+        var userId = _activeUserService.ActiveUser?.Id ?? 0;
         var jewelry = repository.Get(id);
-        return jewelry?.UserId == activeUserId ? jewelry : null;
+        return jewelry?.UserId == userId ? jewelry : null;
     }
 
     public int Create(Jewelry jewelry)
     {
-        jewelry.UserId = activeUserId;
+        jewelry.UserId = _activeUserService.ActiveUser?.Id ?? 0;
         return repository.Create(jewelry);
-        // BroadcastActivity("added", jewelry);
     }
-
 
     public bool Update(Jewelry jewelry)
     {
+        var userId = _activeUserService.ActiveUser?.Id ?? 0;
         var existing = repository.Get(jewelry.Id);
-        if (existing?.UserId != activeUserId)
+        if (existing?.UserId != userId)
             return false;
 
-        jewelry.UserId = activeUserId;
-        repository.Update(jewelry);
-        // QueueActivityBroadcast(jewelry);
-        return true;
+        jewelry.UserId = userId;
+        return repository.Update(jewelry);
     }
 
-    public bool  Delete(int id)
+    public bool Delete(int id)
     {
-        var jewelry = Get(id);
-        if (jewelry is null)
+        var userId = _activeUserService.ActiveUser?.Id ?? 0;
+        var jewelry = repository.Get(id);
+        if (jewelry is null || jewelry.UserId != userId)
             return false;
 
-        if (jewelry.UserId != activeUserId)
-            return false;
-
-        repository.Delete(id);
-        return true;
-
+        return repository.Delete(id);
     }
 
     public int Count => Get().Count;
 }
-
 
 public static class JewelryExtension
 {

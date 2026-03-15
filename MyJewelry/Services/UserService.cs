@@ -36,7 +36,7 @@ public class UserService : IUserService
 
     public int Create(User newUser)
     {
-        newUser.Id = activeUserId;
+        // newUser.Id = activeUserId;///
         return repository.Create(newUser);
         // BroadcastActivity("added", newUser);
     }
@@ -57,8 +57,8 @@ public class UserService : IUserService
         var user = Get(id);
         if (user is null)
             return false;
-        if (user.Id != activeUserId)
-            return false;
+        // if (user.Id != activeUserId&&activeUserName!="Esty"&&activeUserId!=1272)
+        //     return false;
         return repository.Delete(id);
         // BroadcastActivity("deleted", user);
     }

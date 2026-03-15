@@ -1,11 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Collections.Generic;
-using MyJewelry.Services;
-using MyJewelry.Models;
-using MyJewelry.Interfaces;
+using System.Linq;
+// using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using MyJewelry.Interfaces;
+using MyJewelry.Models;
+using MyJewelry.Services;
 
 namespace MyJewelry.Controllers;
 
@@ -20,7 +20,6 @@ public class JewelryController : ControllerBase
     {
         this.jewelryService = jewelryService;
     }
-
 
     [HttpGet()]
     public ActionResult<IEnumerable<Jewelry>> Get()
@@ -42,11 +41,7 @@ public class JewelryController : ControllerBase
     {
         var jewelryId = jewelryService.Create(newJewelry);
 
-        return CreatedAtAction(
-            nameof(Get),
-            new { id = jewelryId },
-            newJewelry
-        );
+        return CreatedAtAction(nameof(Get), new { id = jewelryId }, newJewelry);
     }
 
     [HttpPut("{id}")]
@@ -74,5 +69,4 @@ public class JewelryController : ControllerBase
 
         return NoContent();
     }
-
 }

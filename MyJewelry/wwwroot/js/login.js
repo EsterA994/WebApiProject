@@ -1,17 +1,19 @@
 const getUserDetails = (event) => {
     event.preventDefault();
 
-    let userName = document.getElementById('userName').value.trim();
-    let userId = document.getElementById('userId').value.trim();
-
+    // שליפת הנתונים מהטופס
     const user = {
-        Id: Number(userId),
-        Name: userName,
-        Age: 0,
-        Gender: 'jhg',
-    }
+        Id: Number(document.getElementById('userId').value),
+        Name: document.getElementById('userName').value,
+        Password: "", // ה-Controller מצפה לאובייקט User, אז צריך לספק את השדות
+        Role: ""
+    };
 
-    const uri = '/User/Login';
+    console.log("asdfg:  "+JSON.stringify(user));
+    
+
+    // הנתיב המעודכן (תואם ל-Route ב-C#)
+    const uri = '/api/Login/login'; 
 
     fetch(uri, {
         method: 'POST',
@@ -22,14 +24,23 @@ const getUserDetails = (event) => {
         body: JSON.stringify(user)
     })
     .then(response => {
-        if (!response.ok) {
-            throw new Error("Login failed");
+        if (response.status==401) {
+            throw new Error("משתמש לא רשום במערכת, אנא פנה למנהל" + response.status + ")");
         }
-        return response.json();
+        else if (!response.ok) {
+            // אם קיבלת שגיאה 404 או 400 זה יקפוץ לכאן
+            throw new Error("נתיב לא נמצא או נתונים שגויים (סטטוס: " + response.status + ")");
+        }
+        return response.text(); 
     })
-    .then((data) => {
-        localStorage.setItem("token", JSON.stringify(data));
+    .then(token => {
+        const cleanToken = token.replace(/"/g, ''); 
+        localStorage.setItem("token", cleanToken);
+        alert("התחברת בהצלחה!");
         window.location.href = '../index.html';
     })
-    .catch(error => console.error('Unable to login.', error));
+    .catch(error => {
+        console.error('Error:', error);
+        alert("שגיאה: " + error.message);
+    });
 }

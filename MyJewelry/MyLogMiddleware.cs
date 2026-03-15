@@ -7,7 +7,6 @@ public class MyLogMiddleware
     private readonly RequestDelegate next;
     private readonly ILogger logger;
 
-
     public MyLogMiddleware(RequestDelegate next, ILogger<MyLogMiddleware> logger)
     {
         this.next = next;
@@ -19,9 +18,10 @@ public class MyLogMiddleware
         var sw = new Stopwatch();
         sw.Start();
         await next.Invoke(c);
-        logger.LogDebug($"{c.Request.Path}.{c.Request.Method} took {sw.ElapsedMilliseconds}ms."
-            + $" User: {c.User?.FindFirst("userId")?.Value ?? "unknown"}");
-        
+        logger.LogDebug(
+            $"{c.Request.Path}.{c.Request.Method} took {sw.ElapsedMilliseconds}ms."
+                + $" User: {c.User?.FindFirst("userId")?.Value ?? "unknown"}"
+        );
     }
 }
 
@@ -32,4 +32,3 @@ public static partial class MiddlewareExtensions
         return builder.UseMiddleware<MyLogMiddleware>();
     }
 }
-

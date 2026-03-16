@@ -10,6 +10,7 @@ namespace MyJewelry.Services;
 
 public class UserService : IUserService
 {
+    
     private readonly IUserRepository repository;
     private readonly int activeUserId;
     private readonly string activeUserName;

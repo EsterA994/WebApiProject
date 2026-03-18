@@ -51,16 +51,22 @@ namespace MyJewelry.Controllers
         public ActionResult<User> Get(int id)
         {
             var currentUser = _activeUserService.ActiveUser;
+            if (currentUser == null) return Unauthorized();
 
-            // בדיקה: אם הוא לא אדמין, מותר לו לראות רק את ה-ID של עצמו
+            // אם המשתמש הוא לא אדמין וגם לא מחפש את עצמו - חסום אותו
             if (!User.IsInRole("Admin") && currentUser.Id != id)
             {
-                return Forbid("you are not authorized to view this user's details");
+                return Forbid();
             }
 
+            // כאן אנחנו קוראים ל-Service
             var user = _userService.Get(id);
+
             if (user == null)
-                return NotFound();
+            {
+                // אם הגענו לכאן והוא אדמין, אבל חזר null, סימן שה-ID פשוט לא קיים ב-List
+                return NotFound($"User with ID {id} was not found in the database.");
+            }
 
             return Ok(user);
         }

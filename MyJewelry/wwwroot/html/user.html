@@ -67,25 +67,20 @@
         </div>
 
         <section class="form-section">
-            <h2 id="profile-title">My Personal Profile</h2>
+            <h2 id="profile-title">Loading Profile...</h2>
             <form id="profile-form" onsubmit="updateMyProfile(event)">
                 <label>My ID:</label>
                 <input type="text" id="my-id" readonly style="background: #eee; margin-bottom: 10px;"><br>
-                <div style="margin-bottom: 10px;">
-                    <label>Name:</label><br>
-                    <input type="text" id="my-name" required>
-                </div>
-                <div style="margin-bottom: 10px;">
-                    <label>New Password:</label><br>
-                    <input type="password" id="my-password" placeholder="Leave blank to keep current">
-                </div>
+                <label>Name:</label><br>
+                <input type="text" id="my-name" required style="margin-bottom: 10px;"><br>
+                <label>New Password:</label><br>
+                <input type="password" id="my-password" placeholder="Leave blank to keep current" style="margin-bottom: 10px;"><br>
                 <button type="submit">Save Changes</button>
             </form>
         </section>
 
         <div id="admin-section" class="hidden">
             <hr>
-            
             <section class="form-section" style="background: rgba(0,0,0,0.05);">
                 <h3>Add New User</h3>
                 <form id="add-user-form" onsubmit="addUser(event)">
@@ -95,12 +90,19 @@
                         <option value="User">User</option>
                         <option value="Admin">Admin</option>
                     </select>
-                    <button type="submit" class="btn-edit">Create User</button>
+                    <button type="submit">Create User</button>
                 </form>
             </section>
 
-            <h1>Admin: All Users</h1>
-            <table id="user-table">
+            <section class="form-section" style="background: rgba(0,0,0,0.05); margin-top: 10px;">
+                <h3>Search User by ID</h3>
+                <input type="number" id="search-id-input" placeholder="Enter ID">
+                <button type="button" onclick="getUserById()">Search</button>
+                <button type="button" onclick="getAllUsers()">Show All</button>
+            </section>
+
+            <h1>Admin: User Management</h1>
+            <table>
                 <thead>
                     <tr>
                         <th>ID</th>
@@ -113,12 +115,8 @@
             </table>
         </div>
     </div>
-
     <div id="toast" class="hidden"></div>
-
     <script src="../js/users.js"></script>
-    <script>
-        loadProfilePage();
-    </script>
+    <script>loadProfilePage();</script>
 </body>
 </html>

@@ -14,7 +14,7 @@ public class UserService(
     IHubContext<ActivityHub> hubContext
     ) : IUserService
 {
-   private readonly IHubContext<ActivityHub> hubContext = hubContext;
+    private readonly IHubContext<ActivityHub> hubContext = hubContext;
     private readonly IUserRepository repository = repository;
     private readonly IActiveUser activeUser = activeUser;
 
@@ -25,18 +25,33 @@ public class UserService(
 
     public User Get(int id)
     {
-        if (this.activeUser.ActiveUser?.Id == id)
+        var active = this.activeUser.ActiveUser;
+
+        // הדפסה ל-Console לצורך ניפוי שגיאות - תראי ב-Visual Studio מה יוצא כאן
+        Console.WriteLine($"Active User: {active?.Name}, Role: {active?.Role}, Searching for: {id}");
+
+        if (active == null) return null;
+
+        // בדיקה שמתעלמת מאותיות גדולות/קטנות (Admin vs admin)
+        bool isMe = (active.Id == id);
+        bool isAdmin = string.Equals(active.Role, "Admin", StringComparison.OrdinalIgnoreCase);
+
+        if (isMe || isAdmin)
+        {
             return repository.Get(id);
+        }
+
         return null;
     }
+
     public int Create(User newUser)
     {
         //  if(this.activeUserId!=role.Id||this.activeUsweName!=role.Name)
         //           throw new Exeption("no authorization")
         int isCreate = repository.Create(newUser);
         // if (isCreate>0)
-            //  BroadcastActivity("created", newUser);
-            return isCreate;
+        //  BroadcastActivity("created", newUser);
+        return isCreate;
     }
 
     public bool Update(User newUser)

@@ -1,28 +1,33 @@
 const userUri = '/User';
 const token = localStorage.getItem("token");
+let myCurrentId = null;
 
-// פונקציית עזר לבדיקה אם המשתמש הנוכחי הוא אדמין
+function logout() {
+    localStorage.clear();
+    window.location.href = 'login.html';
+}
+
 const isAdmin = () => localStorage.getItem("userRole") === "Admin";
 
 function showToast(msg) {
     const t = document.getElementById('toast');
     if(t) {
-        t.innerText = msg; t.classList.remove('hidden');
+        t.innerText = msg;
+        t.classList.remove('hidden');
         setTimeout(() => t.classList.add('hidden'), 3000);
-    } else {
-        alert(msg);
     }
 }
 
-// טעינת הדף
 async function loadProfilePage() {
     if (!token) {
         window.location.href = 'login.html';
         return;
     }
 
+    // שלב 1: טעינת הפרופיל שלי
     await getMyProfile(); 
 
+    // שלב 2: אם אדמין, הצגת אזור ניהול וטעינת הטבלה
     if (isAdmin()) {
         const adminSection = document.getElementById('admin-section');
         if(adminSection) adminSection.classList.remove('hidden');
@@ -30,54 +35,83 @@ async function loadProfilePage() {
     }
 }
 
-// 1. קבלת פרופיל אישי
-function getMyProfile() {
-    fetch(`${userUri}/me`, {
-        headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(res => {
+async function getMyProfile() {
+    try {
+        const res = await fetch(`${userUri}/me`, {
+            headers: { 'Authorization': `Bearer ${token}` }
+        });
         if (res.status === 401) logout();
-        return res.json();
-    })
-    .then(user => {
+        const user = await res.json();
+        
+        myCurrentId = user.id; // שמירת ה-ID למניעת מחיקה עצמית בטבלה
+        
         document.getElementById('my-id').value = user.id;
         document.getElementById('my-name').value = user.name;
         document.getElementById('profile-title').innerText = `Hello, ${user.name} (${user.role})`;
-    })
-    .catch(err => console.error("Error fetching profile:", err));
+    } catch (err) {
+        console.error("Error fetching profile:", err);
+    }
 }
 
-// 2. עדכון פרטים אישיים
-function updateMyProfile(event) {
-    event.preventDefault();
-    const originalId = document.getElementById('my-id').value;
+// חיפוש משתמש לפי ID
+function getUserById() {
+    const searchInput = document.getElementById('search-id-input');
+    const id = searchInput.value;
     
-    const updatedUser = {
-        Id: parseInt(originalId),
-        Name: document.getElementById('my-name').value,
-        Password: document.getElementById('my-password').value || "", 
-        Role: localStorage.getItem("userRole")
-    };
+    if (!id) {
+        getAllUsers(); 
+        return;
+    }
 
-    fetch(`${userUri}/${originalId}`, {
-        method: 'PUT',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(updatedUser)
+    fetch(`${userUri}/${id}`, {
+        headers: { 'Authorization': `Bearer ${token}` }
     })
     .then(res => {
-        if (!res.ok) throw new Error("Update failed");
-        showToast("Profile updated successfully!");
-        localStorage.setItem("userName", updatedUser.Name);
-        document.getElementById('profile-title').innerText = `Hello, ${updatedUser.Name}`;
-        if (isAdmin()) getAllUsers();
+        if (!res.ok) {
+            if (res.status === 404) throw new Error("User ID not found in system");
+            if (res.status === 403) throw new Error("You don't have permission to view this user");
+            throw new Error("Search failed");
+        }
+        return res.json();
     })
-    .catch(err => showToast("Error: Unauthorized or invalid data"));
+    .then(user => {
+        displayUsersInTable([user]);
+    })
+    .catch(err => {
+        showToast(err.message);
+        document.getElementById('user-list').innerHTML = `<tr><td colspan="4" style="text-align:center;">${err.message}</td></tr>`;
+    });
 }
 
-// --- פונקציה חדשה: הוספת משתמש על ידי מנהל ---
+function getAllUsers() {
+    fetch(userUri, { 
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(data => displayUsersInTable(data))
+    .catch(err => console.error("Error fetching users:", err));
+}
+
+function displayUsersInTable(users) {
+    const tBody = document.getElementById('user-list');
+    if(!tBody) return;
+    
+    tBody.innerHTML = '';
+    users.forEach(u => {
+        let tr = tBody.insertRow();
+        const isMe = (u.id == myCurrentId);
+
+        tr.innerHTML = `
+            <td>${u.id}</td>
+            <td>${u.name}</td>
+            <td><span class="badge">${u.role}</span></td>
+            <td>
+                ${isMe ? '<strong>You</strong>' : `<button class="btn-delete" onclick="deleteUser(${u.id})">Delete</button>`}
+            </td>
+        `;
+    });
+}
+
 function addUser(event) {
     event.preventDefault();
     const newUser = {
@@ -97,61 +131,46 @@ function addUser(event) {
     .then(res => {
         if (!res.ok) throw new Error("Failed to add user");
         showToast("User added successfully");
-        document.getElementById('add-user-form').reset(); // איפוס הטופס
-        getAllUsers(); // רענון הטבלה
+        document.getElementById('add-user-form').reset();
+        getAllUsers(); 
     })
     .catch(err => showToast(err.message));
 }
 
-// 3. קבלת כל המשתמשים (רק לאדמין)
-function getAllUsers() {
-    const currentUserId = document.getElementById('my-id').value;
-
-    fetch(userUri, { 
-        headers: { 'Authorization': `Bearer ${token}` }
-    })
-    .then(res => res.json())
-    .then(data => {
-        const tBody = document.getElementById('user-list');
-        if(!tBody) return;
-        
-        tBody.innerHTML = '';
-        data.forEach(u => {
-            let tr = tBody.insertRow();
-            tr.innerHTML = `
-                <td>${u.id}</td>
-                <td>${u.name}</td>
-                <td><span class="badge">${u.role}</span></td>
-                <td>
-                    ${u.id == currentUserId 
-                        ? '<strong>You</strong>' 
-                        : `<button class="btn-delete" onclick="deleteUser(${u.id})">Delete</button>`}
-                </td>
-            `;
-        });
-    });
-}
-
 function deleteUser(id) {
-    if (!confirm("Are you sure you want to delete this user?")) return;
-
+    if (!confirm("Are you sure?")) return;
     fetch(`${userUri}/${id}`, {
         method: 'DELETE',
         headers: { 'Authorization': `Bearer ${token}` }
     })
     .then(res => {
-        if(res.ok) {
-            showToast("User removed");
-            getAllUsers();
-        } else {
-            showToast("Failed to delete user");
-        }
+        if(res.ok) { showToast("User removed"); getAllUsers(); }
     });
 }
 
-function logout() {
-    localStorage.clear();
-    window.location.href = 'login.html';
+function updateMyProfile(event) {
+    event.preventDefault();
+    const updatedUser = {
+        Id: parseInt(myCurrentId),
+        Name: document.getElementById('my-name').value,
+        Password: document.getElementById('my-password').value || "", 
+        Role: localStorage.getItem("userRole")
+    };
+
+    fetch(`${userUri}/${myCurrentId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedUser)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Update failed");
+        showToast("Profile updated!");
+        if (isAdmin()) getAllUsers();
+    })
+    .catch(err => showToast("Error updating profile"));
 }
 
 

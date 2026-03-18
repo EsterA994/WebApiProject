@@ -1,43 +1,45 @@
-input[type='submit'],
-button,
-[aria-label] {
-    cursor: pointer;
-    background-color: #ff7a6e;
-    border: 2px solid #ff7a6e;
-    border-radius: 3px;
-}
-
-input {
-    background-color: #f8aba4;
-    border: 1px solid black;
-}
-
 body {
-    background-color: #ffd3cf;
+    background-color: #ffd3cf; /* צבע ורוד עדין מהקוד שלך */
+    font-family: Arial, sans-serif;
+    direction: rtl;
+    padding: 20px;
 }
 
-#editForm {
-    display: none;
+.nav-bar {
+    background: white;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 table {
+    width: 100%;
     background-color: #f8aba4;
-    font-family: Arial, sans-serif;
-    border: 1px solid #f8aba4;
     border-collapse: collapse;
+}
+
+th, td {
+    border: 1px solid #ff7a6e;
+    padding: 10px;
+    text-align: center;
 }
 
 th {
     background-color: #ff7a6e;
-    padding: 5px;
+    color: white;
 }
 
-td {
-    border: 1px solid #ff7a6e;
-    width: 110px;
-    padding: 5px;
+button, input[type="submit"] {
+    background-color: #ff7a6e;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    border-radius: 4px;
 }
 
-a {
-    color: black;
-}
+.hidden { display: none; }
+.btn-delete { background-color: #d63031; }

@@ -1,89 +1,163 @@
+// // using System.IdentityModel.Tokens.Jwt;
+// // using MyJewelry.Services;
+// // using MyJewelry.Interfaces;
+// // using Microsoft.OpenApi.Models;
 
-// using System.IdentityModel.Tokens.Jwt;
-// using MyJewelry.Services;
+// // var builder = WebApplication.CreateBuilder(args);
+
+// // // 1. הוספת שירותי Controllers
+// // builder.Services.AddControllers();
+
+// // // 2. רישום השירותים שלך באמצעות ה-Extensions שכתבת בקבצים
+// // builder.Services.AddUserService();      // מתוך UserService.cs
+// // builder.Services.AddJewelryService();   // מתוך JewelryService.cs
+// // builder.Services.AddActiveUser();        // מתוך ActiveUserService.cs
+
+// // // 3. חובה עבור ActiveUserService - גישה ל-HttpContext
+// // builder.Services.AddHttpContextAccessor();
+
+// // // 4. הגדרת אימות (Authentication) עם JWT
+// // builder.Services.AddAuthentication("Bearer")
+// //     .AddJwtBearer("Bearer", options =>
+// //     {
+// //         options.TokenValidationParameters = JewelryTokenService.GetTokenValidationParameters();
+// //     });
+
+// // // 5. הגדרת Swagger/OpenAPI
+// // builder.Services.AddEndpointsApiExplorer();
+// // builder.Services.AddSwaggerGen(c =>
+// // {
+// //     c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyJewelry API", Version = "v1" });
+// // });
+
+// // var app = builder.Build();
+
+// // // --- הגדרת צינור הטיפול בבקשות (Middleware Pipeline) ---
+
+// // // א. הגשת קבצים סטטיים (חייב לבוא לפני הניתוב והאימות)
+// // app.UseDefaultFiles(); // מאפשר להריץ את index.html אוטומטית
+// // app.UseStaticFiles();  // מגיש קבצים מתיקיית wwwroot
+
+// // app.UseRouting();
+
+// // // ב. אימות והרשאות
+// // app.UseAuthentication();
+// // app.UseMyLogMiddleware(); // הלוגר שלך יראה עכשיו את המשתמש המחובר
+// // app.UseAuthorization();
+
+// // // ג. הגדרת Swagger בסביבת פיתוח
+// // if (app.Environment.IsDevelopment())
+// // {
+// //     app.UseSwagger();
+// //     app.UseSwaggerUI();
+// // }
+
+// // app.MapControllers();
+
+// // app.Run();
+
+// using System.IdentityModel.Tokens.Jwt; // להוסיף למעלה
+// using MyJewelry;
+// using MyJewelry.Hubs;
 // using MyJewelry.Interfaces;
-// using Microsoft.OpenApi.Models;
+// using MyJewelry.Services;
 
+// JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
+
+// ///
 // var builder = WebApplication.CreateBuilder(args);
 
-// // 1. הוספת שירותי Controllers
+// // Add services to the container
 // builder.Services.AddControllers();
 
-// // 2. רישום השירותים שלך באמצעות ה-Extensions שכתבת בקבצים
-// builder.Services.AddUserService();      // מתוך UserService.cs
-// builder.Services.AddJewelryService();   // מתוך JewelryService.cs
-// builder.Services.AddActiveUser();        // מתוך ActiveUserService.cs
+// builder.Services.AddSignalR();
 
-// // 3. חובה עבור ActiveUserService - גישה ל-HttpContext
+// builder.Services.AddUserService();
+// builder.Services.AddJewelryService();
+
 // builder.Services.AddHttpContextAccessor();
+// builder.Services.AddActiveUser();
 
-// // 4. הגדרת אימות (Authentication) עם JWT
-// builder.Services.AddAuthentication("Bearer")
-//     .AddJwtBearer("Bearer", options =>
-//     {
-//         options.TokenValidationParameters = JewelryTokenService.GetTokenValidationParameters();
-//     });
+// builder.Logging.ClearProviders();
+// builder.Logging.AddConsole();
 
-// // 5. הגדרת Swagger/OpenAPI
-// builder.Services.AddEndpointsApiExplorer();
-// builder.Services.AddSwaggerGen(c =>
-// {
-//     c.SwaggerDoc("v1", new OpenApiInfo { Title = "MyJewelry API", Version = "v1" });
-// });
+// builder.Services.AddOpenApi();
+
+// builder
+//     .Services.AddAuthentication("Bearer")
+//     .AddJwtBearer(
+//         "Bearer",
+//         options =>
+//         {
+//             options.TokenValidationParameters = JewelryTokenService.GetTokenValidationParameters();
+//         }
+//     );
 
 // var app = builder.Build();
 
-// // --- הגדרת צינור הטיפול בבקשות (Middleware Pipeline) ---
+// /* js */
+// app.UseDefaultFiles();
+// app.UseStaticFiles();
 
-// // א. הגשת קבצים סטטיים (חייב לבוא לפני הניתוב והאימות)
-// app.UseDefaultFiles(); // מאפשר להריץ את index.html אוטומטית
-// app.UseStaticFiles();  // מגיש קבצים מתיקיית wwwroot
-
-// app.UseRouting();
-
-// // ב. אימות והרשאות
 // app.UseAuthentication();
-// app.UseMyLogMiddleware(); // הלוגר שלך יראה עכשיו את המשתמש המחובר
-// app.UseAuthorization();
 
-// // ג. הגדרת Swagger בסביבת פיתוח
+// app.UseAuthorization();
+// app.UseMyLogMiddleware();
+
+// // Configure the HTTP request pipeline
 // if (app.Environment.IsDevelopment())
 // {
-//     app.UseSwagger();
-//     app.UseSwaggerUI();
+//     app.MapOpenApi();
+//     app.UseSwaggerUI(options =>
+//     {
+//         options.SwaggerEndpoint("/openapi/v1.json", "v1");
+//     });
 // }
 
 // app.MapControllers();
 
+// app.MapHub<ActivityHub>("/activityHub");
+
 // app.Run();
-
-
-
-
-using System.IdentityModel.Tokens.Jwt; // להוסיף למעלה
+using System.IdentityModel.Tokens.Jwt;
 using MyJewelry;
+using MyJewelry.Hubs;
 using MyJewelry.Interfaces;
 using MyJewelry.Services;
 
+// ניקוי מיפוי ברירת המחדל של קליימים כדי שה-ID והשם יופיעו כמו שצריך
 JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
-///
 var builder = WebApplication.CreateBuilder(args);
 
-// Add services to the container
+// --- 1. רישום שירותים (Services) למערכת ---
+
 builder.Services.AddControllers();
 
+// הוספת SignalR (חובה עבור ActivityHub)
+builder.Services.AddSignalR();
+
+// רישום השירותים העסקיים שלך
 builder.Services.AddUserService();
 builder.Services.AddJewelryService();
 
+// *** הוספת RabbitMQ - זה מה שהיה חסר וגרם לקריסה האחרונה ***
+builder.Services.AddRabbitMq();
+
+builder.Services.AddHostedService<JewelryUpdateWorker>();
+
+// שירותים לניהול משתמש מחובר
 builder.Services.AddHttpContextAccessor();
 builder.Services.AddActiveUser();
 
+// הגדרות לוגים
 builder.Logging.ClearProviders();
 builder.Logging.AddConsole();
 
+// הגדרת Swagger/OpenApi
 builder.Services.AddOpenApi();
 
+// הגדרת אימות JWT
 builder
     .Services.AddAuthentication("Bearer")
     .AddJwtBearer(
@@ -96,16 +170,20 @@ builder
 
 var app = builder.Build();
 
-/* js */
+// --- 2. הגדרת צינור הטיפול בבקשות (Middleware) ---
+
+// הגשת קבצים סטטיים (HTML, JS, CSS)
 app.UseDefaultFiles();
 app.UseStaticFiles();
 
+// אימות והרשאות (סדר חשוב!)
 app.UseAuthentication();
-
-app.UseAuthorization();
 app.UseMyLogMiddleware();
+app.UseAuthorization();
 
-// Configure the HTTP request pipeline
+// לוגר אישי (אחרי האימות כדי שיזהה משתמש)
+
+// הגדרת Swagger בסביבת פיתוח
 if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
@@ -115,10 +193,10 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-
-
-
+// מיפוי ה-Controllers
 app.MapControllers();
 
-app.Run();
+// מיפוי ה-SignalR Hub
+app.MapHub<ActivityHub>("/activityHub");
 
+app.Run();

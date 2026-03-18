@@ -1,13 +1,12 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Microsoft.Extensions.DependencyInjection;
+using MyJewelry.Hubs;
 using MyJewelry.Interfaces;
 using MyJewelry.Models;
 using Microsoft.AspNetCore.SignalR;
- using MyJewelry.Hubs; 
-using MyJewelry.Services;
-using  MyJewelry.Models;
+using Microsoft.Extensions.DependencyInjection;
+
 namespace MyJewelry.Services;
 
 public class JewelryService : IJewelryService
@@ -17,13 +16,19 @@ public class JewelryService : IJewelryService
     private readonly IRabbitMqService rabbitMqService;
     private readonly IActiveUser _activeUserService;
 
-    // תיקון 1: הוספתי את IRabbitMqService לסוגריים כדי שלא יהיה קריסה!
-    public JewelryService(IJewelryRepository repository, IActiveUser activeUser, IHubContext<ActivityHub> hubContext, IRabbitMqService rabbitMqService)
+    public JewelryService(
+        IJewelryRepository repository,
+        IActiveUser activeUser,
+        IHubContext<ActivityHub> hubContext,
+        IRabbitMqService rabbitMqService
+    )
     {
         this.repository = repository;
-        this._activeUserService = activeUser;
         this.hubContext = hubContext;
-        this.rabbitMqService = rabbitMqService; 
+        this.rabbitMqService = rabbitMqService;
+        // if(activeUser is null)
+        //     throw new System.InvalidOperationException("Active user is required");
+        this._activeUserService = activeUser;
     }
 
     public List<Jewelry> Get()
@@ -43,8 +48,8 @@ public class JewelryService : IJewelryService
     {
         jewelry.UserId = _activeUserService.ActiveUser?.Id ?? 0;
         int isCreate = repository.Create(jewelry);
-        if (    isCreate > 0)
-            BroadcastActivity("created", jewelry);
+        // if (isCreate > 0)
+        BroadcastActivity("created", jewelry);
         return isCreate;
     }
 
@@ -57,21 +62,21 @@ public class JewelryService : IJewelryService
 
         jewelry.UserId = userId;
         bool isUpdate = repository.Update(jewelry);
-        if (isUpdate)
-            QueueActivityBroadcast(jewelry);
+        // if (isUpdate)
+        QueueActivityBroadcast(jewelry);
         return isUpdate;
     }
 
     public bool Delete(int id)
     {
         var userId = _activeUserService.ActiveUser?.Id ?? 0;
-        var jewelry = repository.Get(id);
+        var jewelry = Get(id);//repository.Get(id);
         if (jewelry is null || jewelry.UserId != userId)
             return false;
 
         bool isDelete = repository.Delete(id);
-        if (isDelete)
-            BroadcastActivity("deleted", jewelry);
+        // if (isDelete)
+        BroadcastActivity("deleted", jewelry);
         return isDelete;
     }
 
@@ -86,12 +91,12 @@ public class JewelryService : IJewelryService
     {
         // תיקון 2: שולפים את המזהה ושם המשתמש בצורה תקינה
         var user = _activeUserService.ActiveUser;
-        var message = new JewelryUpdatedMassage
+        var message = new JewelryUpdatedMessage
         {
             UserId = user?.Id ?? 0,
             Username = user?.Name ?? "Unknown",
             JewelryName = jewelry.Name,
-            Timestamp = DateTime.UtcNow
+            Timestamp = DateTime.UtcNow,
         };
 
         rabbitMqService.PublishJewelryUpdated(message).Wait();
@@ -100,12 +105,22 @@ public class JewelryService : IJewelryService
     public int Count => Get().Count;
 }
 
+// public static class JewelryExtension
+// {
+//     public static void AddJewelryService(this IServiceCollection services)
+//     {
+//         services.AddSingleton<IJewelryRepository, JewelryRepository>();
+//         services.AddScoped<IJewelryService, JewelryService>();
+//     }
+// }
+
 public static class JewelryExtension
 {
-    public static void AddJewelryService(this IServiceCollection services)
+    public static IServiceCollection AddJewelryService(this IServiceCollection services)
     {
         services.AddSingleton<IJewelryRepository, JewelryRepository>();
         services.AddScoped<IJewelryService, JewelryService>();
+        return services;//השורה שהוספתי לעומת הקטע הקודם
     }
 }
 
@@ -203,7 +218,6 @@ public static class JewelryExtension
 
 //             rabbitMqService.PublishJewelryUpdated(message).Wait();
 //         }
-
 
 //     public int Count => Get().Count;
 // }

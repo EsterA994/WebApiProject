@@ -55,7 +55,7 @@ namespace MyJewelry.Controllers
             // בדיקה: אם הוא לא אדמין, מותר לו לראות רק את ה-ID של עצמו
             if (!User.IsInRole("Admin") && currentUser.Id != id)
             {
-                return Forbid("אינך מורשה לצפות בפרטים של משתמש אחר");
+                return Forbid("you are not authorized to view this user's details");
             }
 
             var user = _userService.Get(id);

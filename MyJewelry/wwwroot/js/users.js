@@ -1,3 +1,160 @@
+const userUri = '/User';
+const token = localStorage.getItem("token");
+
+// פונקציית עזר לבדיקה אם המשתמש הנוכחי הוא אדמין
+const isAdmin = () => localStorage.getItem("userRole") === "Admin";
+
+function showToast(msg) {
+    const t = document.getElementById('toast');
+    if(t) {
+        t.innerText = msg; t.classList.remove('hidden');
+        setTimeout(() => t.classList.add('hidden'), 3000);
+    } else {
+        alert(msg);
+    }
+}
+
+// טעינת הדף
+async function loadProfilePage() {
+    if (!token) {
+        window.location.href = 'login.html';
+        return;
+    }
+
+    await getMyProfile(); 
+
+    if (isAdmin()) {
+        const adminSection = document.getElementById('admin-section');
+        if(adminSection) adminSection.classList.remove('hidden');
+        getAllUsers(); 
+    }
+}
+
+// 1. קבלת פרופיל אישי
+function getMyProfile() {
+    fetch(`${userUri}/me`, {
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(res => {
+        if (res.status === 401) logout();
+        return res.json();
+    })
+    .then(user => {
+        document.getElementById('my-id').value = user.id;
+        document.getElementById('my-name').value = user.name;
+        document.getElementById('profile-title').innerText = `Hello, ${user.name} (${user.role})`;
+    })
+    .catch(err => console.error("Error fetching profile:", err));
+}
+
+// 2. עדכון פרטים אישיים
+function updateMyProfile(event) {
+    event.preventDefault();
+    const originalId = document.getElementById('my-id').value;
+    
+    const updatedUser = {
+        Id: parseInt(originalId),
+        Name: document.getElementById('my-name').value,
+        Password: document.getElementById('my-password').value || "", 
+        Role: localStorage.getItem("userRole")
+    };
+
+    fetch(`${userUri}/${originalId}`, {
+        method: 'PUT',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(updatedUser)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Update failed");
+        showToast("Profile updated successfully!");
+        localStorage.setItem("userName", updatedUser.Name);
+        document.getElementById('profile-title').innerText = `Hello, ${updatedUser.Name}`;
+        if (isAdmin()) getAllUsers();
+    })
+    .catch(err => showToast("Error: Unauthorized or invalid data"));
+}
+
+// --- פונקציה חדשה: הוספת משתמש על ידי מנהל ---
+function addUser(event) {
+    event.preventDefault();
+    const newUser = {
+        Name: document.getElementById('add-user-name').value,
+        Password: document.getElementById('add-user-password').value,
+        Role: document.getElementById('add-user-role').value
+    };
+
+    fetch(userUri, {
+        method: 'POST',
+        headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(newUser)
+    })
+    .then(res => {
+        if (!res.ok) throw new Error("Failed to add user");
+        showToast("User added successfully");
+        document.getElementById('add-user-form').reset(); // איפוס הטופס
+        getAllUsers(); // רענון הטבלה
+    })
+    .catch(err => showToast(err.message));
+}
+
+// 3. קבלת כל המשתמשים (רק לאדמין)
+function getAllUsers() {
+    const currentUserId = document.getElementById('my-id').value;
+
+    fetch(userUri, { 
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(res => res.json())
+    .then(data => {
+        const tBody = document.getElementById('user-list');
+        if(!tBody) return;
+        
+        tBody.innerHTML = '';
+        data.forEach(u => {
+            let tr = tBody.insertRow();
+            tr.innerHTML = `
+                <td>${u.id}</td>
+                <td>${u.name}</td>
+                <td><span class="badge">${u.role}</span></td>
+                <td>
+                    ${u.id == currentUserId 
+                        ? '<strong>You</strong>' 
+                        : `<button class="btn-delete" onclick="deleteUser(${u.id})">Delete</button>`}
+                </td>
+            `;
+        });
+    });
+}
+
+function deleteUser(id) {
+    if (!confirm("Are you sure you want to delete this user?")) return;
+
+    fetch(`${userUri}/${id}`, {
+        method: 'DELETE',
+        headers: { 'Authorization': `Bearer ${token}` }
+    })
+    .then(res => {
+        if(res.ok) {
+            showToast("User removed");
+            getAllUsers();
+        } else {
+            showToast("Failed to delete user");
+        }
+    });
+}
+
+function logout() {
+    localStorage.clear();
+    window.location.href = 'login.html';
+}
+
+
 // const userUri = '/User';
 // const token = localStorage.getItem("token");
 
@@ -89,170 +246,4 @@
 //     .then(() => { showToast("User removed"); getAllUsers(); });
 // }
 
-const uri = '/User';
-let users = [];
 
-function getItems() {
-    const token = localStorage.getItem("token");
-
-    fetch(uri, {
-        method: 'GET',
-        headers: {
-            'Authorization': `Bearer ${token}`,
-            'Accept': 'application/json'
-        }
-    })
-        .then(response => response.json())
-        .then(data => displayItems(data))
-        .catch(error => console.error('Unable to get items.', error));
-}
-
-function addItem() {
-    const token = localStorage.getItem("token"); // שליפת הטוקן
-    const addNameTextbox = document.getElementById('add-name');
-    const addIdTextbox = document.getElementById('add-id');
-
-    const user = {
-        name: addNameTextbox.value.trim(),
-        id: parseInt(addIdTextbox.value.trim(), 10), // חשוב שזה יהיה מספר
-        password: '', // וודאי שהשרת מאפשר סיסמה ריקה ביצירה
-        Role: "User"
-    };
-
-    fetch(uri, {
-        method: 'POST',
-        headers: {
-            'Authorization': `Bearer ${token}`, // הוספת הטוקן כאן!
-            'Accept': 'application/json',
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(user)
-    })
-        .then(response => {
-            if (!response.ok) throw new Error("Insert failed: " + response.statusText);
-            return response.json();
-        })
-        .then(() => {
-            getItems();
-            addNameTextbox.value = '';
-            addIdTextbox.value = '';
-        })
-        .catch(error => console.error('Unable to post.', error));
-}
-
-
-function deleteItem(id) {
-    const token = localStorage.getItem("token");
-    
-    fetch(`${uri}/${id}`, {
-        method: 'DELETE',
-        headers: {
-            'Authorization': `Bearer ${token}` // הוספת הטוקן
-        }
-    })
-    .then(response => {
-        if (!response.ok) throw new Error("Delete failed");
-        getItems();
-    })
-    .catch(error => console.error('Unable to delete user.', error));
-}
-
-function displayEditForm(id) {
-    const user = users.find(u => u.id === id);
-
-    document.getElementById('edit-id').value = user.id;
-    document.getElementById('edit-name').value = user.name;
-    document.getElementById('edit-password').value = user.password;
-    document.getElementById('editForm').style.display = 'block';
-}
-
-function updateItem() {
-    const userId = document.getElementById('edit-id').value;
-    
-    const user = {
-        id: parseInt(userId), // חייב להיות מספר ותואם ל-ID ב-URL
-        name: document.getElementById('edit-name').value.trim(),
-        // וודא שאתה שולח את כל השדות שהמודל ב-C# מצפה להם (Password, Role וכו')
-        password: "", 
-        role: "User"
-    };
-
-    fetch(`${uri}/${userId}`, {
-        method: 'PUT',
-        headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${localStorage.getItem("token")}` // וודא שיש טוקן
-        },
-        body: JSON.stringify(user)
-    })
-    .then(response => {
-        if (!response.ok) {
-            // אם קיבלנו 400, ננסה להבין למה מהשרת
-            return response.text().then(text => { throw new Error(text || "Update failed") });
-        }
-        return response;
-    })
-    .then(() => {
-        getItems();
-        closeInput();
-    })
-    .catch(error => console.error('Unable to update user.', error));
-}
-
-function closeInput() {
-    document.getElementById('editForm').style.display = 'none';
-}
-
-function displayCount(userCount) {
-    const name = (userCount === 1) ? 'user:' : 'users :';
-
-    document.getElementById('counter').innerText = `${userCount} ${name}`;
-}
-
-
-function displayItems(data) {
-    const tBody = document.getElementById('user');
-    tBody.innerHTML = '';
-
-    displayCount(data.length);
-
-    const button = document.createElement('button');
-
-    data.forEach(user => {
-
-        console.log(user + "----");
-
-
-        let editButton = button.cloneNode(false);
-        editButton.innerText = 'Edit';
-        editButton.setAttribute('onclick', `displayEditForm(${user.id})`);
-
-        let deleteButton = button.cloneNode(false);
-        deleteButton.innerText = 'Delete';
-        deleteButton.setAttribute('onclick', `deleteItem(${user.id})`);
-
-        let tr = tBody.insertRow();
-
-
-        let td1 = tr.insertCell(0);
-        let textNode = document.createTextNode(user.id);
-        td1.appendChild(textNode);
-
-        let td2 = tr.insertCell(1);
-        let textNode2 = document.createTextNode(user.name);
-        td2.appendChild(textNode2);
-
-        let td3 = tr.insertCell(2);
-        let textNode3 = document.createTextNode(user.password);
-        td3.appendChild(textNode3);
-
-        let td4 = tr.insertCell(3);
-        td4.appendChild(editButton);
-
-        let td5 = tr.insertCell(4);
-        td5.appendChild(deleteButton);
-    });
-
-    users = data;
-}

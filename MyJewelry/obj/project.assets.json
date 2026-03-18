@@ -158,7 +158,7 @@
           }
         }
       },
-      "RabbitMQ.Client/7.2.0": {
+      "RabbitMQ.Client/7.2.1": {
         "type": "package",
         "dependencies": {
           "System.IO.Pipelines": "8.0.0",
@@ -706,10 +706,10 @@
         "microsoft.openapi.nuspec"
       ]
     },
-    "RabbitMQ.Client/7.2.0": {
-      "sha512": "PPQ7cF7lwbhqC4up6en1bTUZlz06YqQwJecOJzsguTtyhNA7oL5uNDZIx/h6ZfcyPZV4V3DYKSCxfm4RUFLcbA==",
+    "RabbitMQ.Client/7.2.1": {
+      "sha512": "YKXEfg9fVQiTKgZlvIhAfPSFaamEgi8DsQmisCH0IAsU4FYLrtoguDrDj6JtJVGUt40QPnBLRH6fTQcAC4qsOg==",
       "type": "package",
-      "path": "rabbitmq.client/7.2.0",
+      "path": "rabbitmq.client/7.2.1",
       "files": [
         ".nupkg.metadata",
         ".signature.p7s",
@@ -719,7 +719,7 @@
         "lib/net8.0/RabbitMQ.Client.xml",
         "lib/netstandard2.0/RabbitMQ.Client.dll",
         "lib/netstandard2.0/RabbitMQ.Client.xml",
-        "rabbitmq.client.7.2.0.nupkg.sha512",
+        "rabbitmq.client.7.2.1.nupkg.sha512",
         "rabbitmq.client.nuspec"
       ]
     },
@@ -912,29 +912,29 @@
       "Microsoft.AspNetCore.Authentication.JwtBearer >= 9.0.0",
       "Microsoft.AspNetCore.OpenApi >= 9.0.0",
       "Microsoft.IdentityModel.Tokens >= 8.0.1",
-      "RabbitMQ.Client >= 7.2.0",
+      "RabbitMQ.Client >= 7.2.1",
       "Swashbuckle.AspNetCore >= 6.6.2",
       "System.IdentityModel.Tokens.Jwt >= 8.0.1"
     ]
   },
   "packageFolders": {
-    "C:\\Users\\user1\\.nuget\\packages\\": {},
+    "C:\\Users\\user\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
+      "projectUniqueName": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
       "projectName": "MyJewelry",
-      "projectPath": "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
-      "packagesPath": "C:\\Users\\user1\\.nuget\\packages\\",
-      "outputPath": "C:\\שנה ב תכנות\\webapi\\פרויקט\\project-webapi\\WebApiProject\\MyJewelry\\obj\\",
+      "projectPath": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\MyJewelry.csproj",
+      "packagesPath": "C:\\Users\\user\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\user\\Desktop\\תכנות יד תשפו\\ASP.NET WebApi\\שלי\\WebApiProject\\MyJewelry\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\user1\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\user\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],
@@ -943,6 +943,7 @@
       ],
       "sources": {
         "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+        "C:\\Program Files\\dotnet\\library-packs": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -981,7 +982,7 @@
           },
           "RabbitMQ.Client": {
             "target": "Package",
-            "version": "[7.2.0, )"
+            "version": "[7.2.1, )"
           },
           "Swashbuckle.AspNetCore": {
             "target": "Package",
@@ -1011,7 +1012,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.312/PortableRuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\9.0.311/PortableRuntimeIdentifierGraph.json"
       }
     }
   }

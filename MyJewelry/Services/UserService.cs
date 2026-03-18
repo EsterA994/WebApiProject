@@ -1,78 +1,97 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using MyJewelry.Interfaces;
-using MyJewelry.Models;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.Extensions.DependencyInjection;
-
+using MyJewelry.Hubs;
+using MyJewelry.Interfaces;
+using MyJewelry.Models;
 namespace MyJewelry.Services;
 
-public class UserService : IUserService
+public class UserService(
+    IUserRepository repository,
+    IActiveUser activeUser,
+    IHubContext<ActivityHub> hubContext
+    ) : IUserService
 {
-    
-    private readonly IUserRepository repository;
-    private readonly int activeUserId;
-    private readonly string activeUserName;
+   private readonly IHubContext<ActivityHub> hubContext = hubContext;
+    private readonly IUserRepository repository = repository;
+    private readonly IActiveUser activeUser = activeUser;
 
-
-    public UserService(IUserRepository repository, IActiveUser activeUser)
+    public List<User> Get()
     {
-        this.repository = repository;
-        var user = activeUser.ActiveUser;
-
-        // במקום לזרוק שגיאה כאן, פשוט נשמור את הנתונים אם הם קיימים
-        if (user != null)
-        {
-            this.activeUserId = user.Id;
-            this.activeUserName = user.Name;
-        }
-        else
-        {
-            // ערכי ברירת מחדל למקרה שאין משתמש מחובר (למשל בלוגין)
-            this.activeUserId = 0;
-            this.activeUserName = "Unknown";
-        }
+        return repository.Get();
     }
 
-
-    public List<User> Get() => repository.Get();
-
-    public User Get(int id) => repository.Get(id);
-
-
+    public User Get(int id)
+    {
+        if (this.activeUser.ActiveUser?.Id == id)
+            return repository.Get(id);
+        return null;
+    }
     public int Create(User newUser)
     {
-        // newUser.Id = activeUserId;///
-        return repository.Create(newUser);
-        // BroadcastActivity("added", newUser);
+        //  if(this.activeUserId!=role.Id||this.activeUsweName!=role.Name)
+        //           throw new Exeption("no authorization")
+        int isCreate = repository.Create(newUser);
+        // if (isCreate>0)
+            //  BroadcastActivity("created", newUser);
+            return isCreate;
     }
-
 
     public bool Update(User newUser)
     {
+        // if (this.activeUserId != role.Id || this.activeUsweName != role.Name)
+        //     throw new Exeption("no authorization")
         var existing = repository.Get(newUser.Id);
         if (existing == null)
             return false;
-        return repository.Update(newUser);
-        // QueueActivityBroadcast("updated", newUser);
-
+        bool isUpdate = repository.Update(newUser);
+        // if (isUpdate)
+        //     QueueActivityBroadcast("updated", newUser);
+        return isUpdate;
     }
 
     public bool Delete(int id)
     {
-        var user = Get(id);
+        // if (this.activeUserId != role.Id || this.activeUsweName != role.Name)
+        //     throw new Exception("no authorization")
+        var user = repository.Get(id);
         if (user is null)
             return false;
         // if (user.Id != activeUserId&&activeUserName!="Esty"&&activeUserId!=1272)
         //     return false;
-        return repository.Delete(id);
-        // BroadcastActivity("deleted", user);
+        bool flag = repository.Delete(id);
+        // if (flag)
+        //     BroadcastActivity("deleted", user);
+        return flag;
     }
+
+    // private void BroadcastActivity(string action, User user)
+    // {
+    //     // תיקון 2: שולפים את שם המשתמש בצורה תקינה
+    //     var username = activeUser.ActiveUser?.Name ?? "Unknown";
+    //     hubContext.Clients.All.SendAsync("ReceiveActivity", username, action, User.Name);
+    // }
+
+    // private void QueueActivityBroadcast(User user)
+    // {
+    //     // תיקון 2: שולפים את המזהה ושם המשתמש בצורה תקינה
+    //     var userActive = activeUser.ActiveUser;
+    //     var message = new JewelryUpdatedMessage
+    //     {
+    //         UserId = user?.Id ?? 0,
+    //         userActive = user?.Name ?? "Unknown",
+    //         username = user.Name,
+    //         Timestamp = DateTime.UtcNow,
+    //     };
+
+    //     rabbitMqService.PublishJewelryUpdated(message).Wait();
+    // }
+
 
     public int Count => Get().Count;
 }
-
 
 public static partial class UserServiceExtension
 {

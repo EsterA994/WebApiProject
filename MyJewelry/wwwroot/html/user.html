@@ -15,6 +15,7 @@
             <h2 id="profile-title">My Personal Profile</h2>
             <form id="profile-form" onsubmit="updateMyProfile(event)">
                 <input type="hidden" id="my-id">
+                
                 <div style="margin-bottom: 10px;">
                     <label>Name:</label><br>
                     <input type="text" id="my-name" required>
@@ -51,61 +52,73 @@
     </script>
 </body>
 </html> -->
-
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User</title>
-    <link rel="stylesheet" href="../css/jewelry.css">
+    <title>My Profile & User Management</title>
+    <link rel="stylesheet" href="../css/site.css">
 </head>
-
 <body>
+    <div class="container">
+        <div class="nav-bar">
+            <button class="btn-nav" onclick="window.location.href='../index.html'">Back to Jewelry</button>
+            <button class="btn-nav" onclick="logout()">Logout</button>
+        </div>
 
-    <a href="html/login.html"></a>
+        <section class="form-section">
+            <h2 id="profile-title">My Personal Profile</h2>
+            <form id="profile-form" onsubmit="updateMyProfile(event)">
+                <label>My ID:</label>
+                <input type="text" id="my-id" readonly style="background: #eee; margin-bottom: 10px;"><br>
+                <div style="margin-bottom: 10px;">
+                    <label>Name:</label><br>
+                    <input type="text" id="my-name" required>
+                </div>
+                <div style="margin-bottom: 10px;">
+                    <label>New Password:</label><br>
+                    <input type="password" id="my-password" placeholder="Leave blank to keep current">
+                </div>
+                <button type="submit">Save Changes</button>
+            </form>
+        </section>
 
-    <h1>user</h1>
+        <div id="admin-section" class="hidden">
+            <hr>
+            
+            <section class="form-section" style="background: rgba(0,0,0,0.05);">
+                <h3>Add New User</h3>
+                <form id="add-user-form" onsubmit="addUser(event)">
+                    <input type="text" id="add-user-name" placeholder="User Name" required>
+                    <input type="password" id="add-user-password" placeholder="Password" required>
+                    <select id="add-user-role">
+                        <option value="User">User</option>
+                        <option value="Admin">Admin</option>
+                    </select>
+                    <button type="submit" class="btn-edit">Create User</button>
+                </form>
+            </section>
 
-    <h3>Add</h3>
-    <form action="javascript:void(0);" method="POST" onsubmit="addItem()">
-        <input type="text" id="add-name" placeholder="New user">
-        <input type="text" id="add-id" placeholder="user id">
-        <input type="submit" value="Add">
-    </form>
-
-    <div id="editForm">
-        <h3>Edit</h3>
-        <form action="javascript:void(0);" onsubmit="updateItem()">
-            <input id="edit-id">
-            <input type="text" id="edit-name">
-            <input type="text" id="edit-password">
-            <input type="submit" value="Save">
-            <a onclick="closeInput()" aria-label="Close">&#10006;</a>
-        </form>
+            <h1>Admin: All Users</h1>
+            <table id="user-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Role</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="user-list"></tbody>
+            </table>
+        </div>
     </div>
 
-    <p id="counter"></p>
+    <div id="toast" class="hidden"></div>
 
-    <table>
-        <tr>
-            <th>Id</th>
-            <th>name</th>
-            <th>password</th>
-            <th></th>
-            <th></th>
-        </tr>
-        <tbody id="user"></tbody>
-    </table>
-
-    <a href="../index.html">go to jewelry</a>
-
-    <script src="../js/users.js" asp-append-version></script>
-    <script type="text/javascript">
-        getItems();
+    <script src="../js/users.js"></script>
+    <script>
+        loadProfilePage();
     </script>
-
 </body>
-
 </html>

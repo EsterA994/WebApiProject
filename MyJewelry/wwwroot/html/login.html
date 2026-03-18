@@ -7,12 +7,12 @@
 </head>
 <body>
     <div class="container" style="max-width: 400px; text-align: center;">
-        <h1>Welcome Back</h1>
+        <h1>Welcome To Our Jewelry App</h1>
         <p>Please enter your credentials</p>
         <form onsubmit="getUserDetails(event)">
             <div style="display: flex; flex-direction: column; gap: 10px;">
                 <input type="text" id="userName" placeholder="User Name" required>
-                <input type="password" id="userId" placeholder="Password (Your ID)" required>
+                <input type="text" id="userId" placeholder="Password (Your ID)" required>
                 <input type="submit" value="Login Now">
             </div>
         </form>
@@ -22,23 +22,26 @@
 </body>
 </html> -->
 
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" dir="ltr">
 <head>
     <meta charset="UTF-8">
-    <title>Login</title>
+    <title>Login - Jewelry App</title>
+    <link rel="stylesheet" href="../css/site.css">
 </head>
 <body>
-    <a href="../index.html">חזרה לעמוד הבית</a>
-
-    <form onsubmit="getUserDetails(event)">
-        <input type="text" id="userName" placeholder="User Name">
-        <input type="password" id="password" placeholder="Password">
-        <input type="number" id="userId" placeholder="User Id">
-        <button type="submit">Login</button>
-    </form>
-
+    <div class="container" style="max-width: 400px; text-align: center;">
+        <h1>Welcome To Our Jewelry App</h1>
+        <p>Please enter your credentials</p>
+        <form onsubmit="getUserDetails(event)">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+                <input type="text" id="userName" placeholder="User Name" required>
+                <input type="text" id="userId" placeholder="Password (Your ID)" required>
+                <input type="submit" value="Login Now">
+            </div>
+        </form>
+        <div id="login-msg" style="margin-top: 15px; color: var(--accent);"></div>
+    </div>
     <script src="../js/login.js"></script>
 </body>
-</html> 
+</html>
